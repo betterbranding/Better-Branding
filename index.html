@@ -444,7 +444,8 @@
       border-radius: 24px;
       overflow: hidden;
       position: relative;
-      min-height: 380px;
+      min-height: 280px;
+      max-height: 320px;
       box-shadow: 0 0 40px rgba(255,28,142,0.15);
     }
     .intro-quote-icon {
@@ -1138,7 +1139,8 @@
     .intro-video {
       width: 100%;
       height: 100%;
-      min-height: 420px;
+      min-height: 280px;
+      max-height: 320px;
       object-fit: cover;
       border-radius: 24px;
       border: 1px solid var(--border-cyan);
@@ -1182,9 +1184,6 @@
        2. HERO
   ============================== -->
   <section id="hero">
-    <video class="hero-bg-video" autoplay muted loop playsinline>
-      <source src="https://betterbranding.github.io/Better-Branding/hero_video.mp4" type="video/mp4">
-    </video>
     <canvas id="particle-canvas"></canvas>
     <div class="hero-grid-overlay"></div>
     <div class="hero-glow"></div>
