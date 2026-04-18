@@ -1124,7 +1124,29 @@
       filter: drop-shadow(0 0 15px rgba(255,31,142,0.6));
     }
 
-  </style>
+  
+    .hero-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .intro-video {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid var(--border-cyan);
+      box-shadow: 0 0 40px rgba(0,229,255,0.15), 0 20px 60px rgba(0,0,0,0.1);
+      display: block;
+    }
+
+    </style>
 </head>
 <body>
 
@@ -1160,6 +1182,9 @@
        2. HERO
   ============================== -->
   <section id="hero">
+    <video class="hero-bg-video" autoplay muted loop playsinline>
+      <source src="https://betterbranding.github.io/Better-Branding/hero_video.mp4" type="video/mp4">
+    </video>
     <canvas id="particle-canvas"></canvas>
     <div class="hero-grid-overlay"></div>
     <div class="hero-glow"></div>
@@ -1183,8 +1208,9 @@
         <a href="https://www.thebetterbranding.com/schedule" class="btn-black">Let's Talk</a>
       </div>
       <div class="intro-right reveal reveal-delay-2">
-        <div class="intro-quote-icon">&ldquo;</div>
-        <img src="https://static.wixstatic.com/media/d2b88c_cca42434b3fd4d8eaac3984d802e58a1f000.jpg" alt="Better Branding" loading="lazy" />
+        <video class="intro-video" autoplay muted loop playsinline>
+          <source src="https://betterbranding.github.io/Better-Branding/intro_video.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </section>
