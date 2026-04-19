@@ -752,6 +752,14 @@
       mix-blend-mode: normal;
       opacity: 0.92;
     }
+    .content-right-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 31, 142, 0.18);
+      pointer-events: none;
+      z-index: 1;
+    }
 
     @media (max-width: 768px) {
       .content-grid { grid-template-columns: 1fr; }
