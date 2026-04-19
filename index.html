@@ -1321,7 +1321,7 @@
         </div>
       </div>
       <div class="intro-right reveal reveal-delay-2">
-        <video id="reel-player" class="intro-video" autoplay muted playsinline>
+        <video id="reel-player" class="intro-video" autoplay muted playsinline webkit-playsinline preload="metadata">
           <source src="https://betterbranding.github.io/Better-Branding/reel1.mp4" type="video/mp4">
         </video>
       </div>
@@ -1844,7 +1844,7 @@
 
   <script>
     (function() {
-      var words = ['brands','marketing','media','automations','content','ads','workflows'];
+      var words = ['brands','marketing','media','content','ads','workflows'];
       var idx = 0;
       var el = document.getElementById('cycleWord');
       if (!el) return;
@@ -1872,14 +1872,43 @@
       ];
       var current = 0;
       var player = document.getElementById('reel-player');
-      if (player) {
-        player.addEventListener('ended', function() {
-          current = (current + 1) % reels.length;
-          player.src = reels[current];
-          player.load();
-          player.play();
-        });
+      if (!player) return;
+
+      function tryPlay() {
+        var p = player.play();
+        if (p !== undefined) {
+          p.catch(function() {
+            // Autoplay blocked — wait for first user touch then play
+            document.addEventListener('touchstart', function onTouch() {
+              player.play();
+              document.removeEventListener('touchstart', onTouch);
+            }, { once: true });
+            document.addEventListener('click', function onClick() {
+              player.play();
+              document.removeEventListener('click', onClick);
+            }, { once: true });
+          });
+        }
       }
+
+      // Try to play once metadata is loaded
+      player.addEventListener('loadedmetadata', tryPlay);
+      // Also try immediately in case already loaded
+      if (player.readyState >= 1) tryPlay();
+
+      // Cycle to next reel when one ends
+      player.addEventListener('ended', function() {
+        current = (current + 1) % reels.length;
+        player.src = reels[current];
+        player.load();
+        player.play();
+      });
+
+      // Ensure video plays after page interaction (mobile unlock)
+      document.addEventListener('touchstart', function unlock() {
+        if (player.paused) player.play();
+        document.removeEventListener('touchstart', unlock);
+      }, { once: true });
     })();
   </script>
 
