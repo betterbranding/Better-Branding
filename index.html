@@ -1249,7 +1249,7 @@
         <a href="https://www.thebetterbranding.com/schedule" class="btn-black">Let's Talk</a>
       </div>
       <div class="intro-right reveal reveal-delay-2">
-        <video class="intro-video" autoplay muted loop playsinline>
+        <video id="reel-player" class="intro-video" autoplay muted playsinline>
           <source src="https://betterbranding.github.io/Better-Branding/reel1.mp4" type="video/mp4">
         </video>
       </div>
@@ -1796,5 +1796,26 @@
     })();
   </script>
 
+
+  <!-- Reel auto-cycling -->
+  <script>
+    (function() {
+      var reels = [
+        'https://betterbranding.github.io/Better-Branding/reel1.mp4',
+        'https://betterbranding.github.io/Better-Branding/reel2.mp4',
+        'https://betterbranding.github.io/Better-Branding/reel3.mp4'
+      ];
+      var current = 0;
+      var player = document.getElementById('reel-player');
+      if (player) {
+        player.addEventListener('ended', function() {
+          current = (current + 1) % reels.length;
+          player.src = reels[current];
+          player.load();
+          player.play();
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
