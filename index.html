@@ -833,81 +833,6 @@
     }
 
     /* ==============================
-       8. STORIES SECTION
-    ============================== */
-    #stories {
-      background: var(--gray);
-      padding: 100px 5%;
-    }
-    .stories-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .stories-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      margin-top: 3rem;
-    }
-    .stories-left {
-      background: var(--glass-light);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border-light);
-      border-radius: 24px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 360px;
-    }
-    .stories-left img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .stories-right {
-      border-radius: 24px;
-      overflow: hidden;
-      position: relative;
-      min-height: 360px;
-    }
-    .stories-right-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.6;
-    }
-    .stories-right-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.5) 100%);
-    }
-    .stories-right-text {
-      position: relative;
-      z-index: 2;
-      padding: 3rem;
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-    .stories-right-text p {
-      font-family: Helvetica, Arial, sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
-      color: var(--white);
-      line-height: 1.4;
-    }
-    .stories-right-text .cyan { color: var(--cyan); }
-    .stories-right-text .pink { color: var(--pink); }
-
-    @media (max-width: 768px) {
-      .stories-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ==============================
        9. RESULTS SECTION
     ============================== */
     #results {
@@ -1440,27 +1365,6 @@
       </div>
       <div class="discovery-image-frame reveal reveal-delay-2">
         <img src="https://static.wixstatic.com/media/d2b88c_41807609b953421ea7c265ab336f8686~mv2.jpg" alt="Storytelling" loading="lazy" />
-      </div>
-    </div>
-  </section>
-
-  <!-- ==============================
-       8. "WE TELL BETTER STORIES"
-  ============================== -->
-  <section id="stories">
-    <div class="stories-inner">
-      <h2 class="section-heading reveal">We tell better <span class="pink">stories</span></h2>
-      <div class="stories-grid">
-        <div class="stories-left reveal reveal-delay-1">
-          <img src="https://static.wixstatic.com/media/d2b88c_be097535eee846d99e60ab5684fc764c~mv2.jpg" alt="Client" loading="lazy" />
-        </div>
-        <div class="stories-right reveal reveal-delay-2">
-          <img class="stories-right-bg" src="https://static.wixstatic.com/media/d2b88c_7a921d5e65944e01bb5eecdda5a553bc~mv2.jpg" alt="Greg" loading="lazy" />
-          <div class="stories-right-overlay"></div>
-          <div class="stories-right-text">
-            <p>we believe your <span class="cyan">story</span> is as important as your <span class="pink">product</span></p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
