@@ -1153,6 +1153,33 @@
       transform: rotate(8deg) scale(1.03);
     }
 
+    
+    /* Cycling word animation */
+    .cycle-word-wrapper {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      position: relative;
+    }
+    .cycle-word {
+      display: inline-block;
+      animation: none;
+    }
+    .cycle-word.slide-out-up {
+      animation: slideOutUp 0.35s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+    .cycle-word.slide-in-up {
+      animation: slideInUp 0.35s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+    @keyframes slideOutUp {
+      0%   { transform: translateY(0);    opacity: 1; }
+      100% { transform: translateY(-110%); opacity: 0; }
+    }
+    @keyframes slideInUp {
+      0%   { transform: translateY(110%);  opacity: 0; }
+      100% { transform: translateY(0);     opacity: 1; }
+    }
+
     </style>
 </head>
 <body>
@@ -1226,7 +1253,7 @@
     <div class="brands-dot-grid"></div>
     <div class="brands-inner">
       <div class="brands-heading-row reveal">
-        <h2 class="section-heading">We create better <span class="pink">brands</span></h2>
+        <h2 class="section-heading">We create better <span class="pink cycle-word-wrapper"><span class="cycle-word" id="cycleWord">brands</span></span></h2>
       </div>
 
       <!-- Ticker -->
@@ -1739,5 +1766,25 @@
       });
     });
   </script>
+
+  <script>
+    (function() {
+      var words = ['brands','marketing','media','automations','content','ads','workflows'];
+      var idx = 0;
+      var el = document.getElementById('cycleWord');
+      if (!el) return;
+      setInterval(function() {
+        idx = (idx + 1) % words.length;
+        el.classList.remove('slide-in-up');
+        el.classList.add('slide-out-up');
+        setTimeout(function() {
+          el.textContent = words[idx];
+          el.classList.remove('slide-out-up');
+          el.classList.add('slide-in-up');
+        }, 350);
+      }, 2200);
+    })();
+  </script>
+
 </body>
 </html>
