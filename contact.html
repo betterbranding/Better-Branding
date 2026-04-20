@@ -1111,7 +1111,44 @@
       100% { transform: translateY(0);     opacity: 1; }
     }
 
-    </style>
+    
+  /* Branded location icon chip */
+  .contact-icon-loc {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255,31,142,0.1);
+    border: 1px solid rgba(255,31,142,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .contact-icon-loc::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 14px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: #FF1F8E;
+    position: relative;
+    top: -1px;
+    box-shadow: 0 3px 0 2px rgba(255,31,142,0.25);
+  }
+  .contact-icon-loc::after {
+    content: '';
+    position: absolute;
+    bottom: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  </style>
   <style>
   /* ========== CONTACT PAGE STYLES ========== */
   .contact-hero {
@@ -1405,7 +1442,7 @@
 <section class="contact-hero">
   <span class="cyan-label reveal" style="display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#00F5FF;background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.3);padding:5px 12px;border-radius:100px;margin-bottom:24px;">Get In Touch</span>
   <h1 class="reveal">Let's talk about<br><span>your vision.</span></h1>
-  <p class="reveal reveal-delay-1">Tell us where you want to go. We'll help you get there — and make it look incredible along the way.</p>
+  <p class="reveal reveal-delay-1">Not every brand is ready for what we do. If you're serious about growth, quality, and showing up differently than everyone else, we want to hear from you.</p>
 </section>
 
 <!-- ======= CONTACT BODY ======= -->
@@ -1414,26 +1451,20 @@
 
     <!-- Left: Info -->
     <div class="contact-info reveal">
-      <span class="cyan-label">The Details</span>
-      <h2>We're a<br><strong>real team.</strong></h2>
-      <p>No automated sequences, no outsourced sales reps. When you reach out, you're talking directly to the people who will actually work on your brand.</p>
+      <span class="cyan-label">Before You Reach Out</span>
+      <h2>Do you really<br><strong>want to get better?</strong></h2>
+      <p>We work with owners who are serious about the quality of their brand. Not just the look — the positioning, the content, the message, the execution. Give us a real reason to talk and we'll give you everything we have.</p>
+
 
       <div class="contact-detail">
-        <div class="contact-detail-icon">📧</div>
-        <div class="contact-detail-text">
-          <span>Email</span>
-          <a href="mailto:greg@thebetterbranding.com">greg@thebetterbranding.com</a>
-        </div>
-      </div>
-      <div class="contact-detail">
-        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-icon contact-icon-loc"></div>
         <div class="contact-detail-text">
           <span>Location</span>
           <span>Dallas–Fort Worth, TX</span>
         </div>
       </div>
       <div class="contact-detail">
-        <div class="contact-detail-icon">⏱️</div>
+        <div class="contact-detail-icon contact-icon-loc"></div>
         <div class="contact-detail-text">
           <span>Response Time</span>
           <span>Within 24 hours</span>
