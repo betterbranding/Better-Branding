@@ -866,10 +866,16 @@
       display: block;
     }
     @media (max-width: 768px) {
+      .results-photo-frame {
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+      }
       .results-photo-frame img {
+        width: 100%;
+        height: 100%;
         max-height: none;
-        height: auto;
-        object-fit: contain;
+        object-fit: cover;
+        object-position: top center;
       }
     }
     .service-grid {
@@ -1882,41 +1888,53 @@
       var player = document.getElementById('reel-player');
       if (!player) return;
 
-      function tryPlay() {
+      // Ensure attributes are set programmatically for iOS
+      player.muted = true;
+      player.setAttribute('muted', '');
+      player.setAttribute('playsinline', '');
+      player.setAttribute('webkit-playsinline', '');
+
+      function safePlay() {
         var p = player.play();
-        if (p !== undefined) {
-          p.catch(function() {
-            // Autoplay blocked — wait for first user touch then play
-            document.addEventListener('touchstart', function onTouch() {
-              player.play();
-              document.removeEventListener('touchstart', onTouch);
-            }, { once: true });
-            document.addEventListener('click', function onClick() {
-              player.play();
-              document.removeEventListener('click', onClick);
-            }, { once: true });
-          });
-        }
+        if (p !== undefined) { p.catch(function(){}); }
       }
 
-      // Try to play once metadata is loaded
-      player.addEventListener('loadedmetadata', tryPlay);
-      // Also try immediately in case already loaded
-      if (player.readyState >= 1) tryPlay();
-
-      // Cycle to next reel when one ends
-      player.addEventListener('ended', function() {
-        current = (current + 1) % reels.length;
-        player.src = reels[current];
+      function loadReel(index) {
+        player.src = reels[index];
         player.load();
-        player.play();
+        player.addEventListener('canplay', function onCan() {
+          player.removeEventListener('canplay', onCan);
+          safePlay();
+        });
+      }
+
+      // Initial load — use source already in markup for first reel,
+      // but kick off load() so canplay fires
+      player.load();
+      player.addEventListener('canplay', function onFirst() {
+        player.removeEventListener('canplay', onFirst);
+        safePlay();
       });
 
-      // Ensure video plays after page interaction (mobile unlock)
-      document.addEventListener('touchstart', function unlock() {
-        if (player.paused) player.play();
-        document.removeEventListener('touchstart', unlock);
-      }, { once: true });
+      // If already has enough data, play immediately
+      if (player.readyState >= 3) safePlay();
+
+      // Cycle reels on end
+      player.addEventListener('ended', function() {
+        current = (current + 1) % reels.length;
+        loadReel(current);
+      });
+
+      // Mobile unlock: any interaction kicks off play
+      function unlockPlay() {
+        if (player.paused) {
+          player.muted = true;
+          safePlay();
+        }
+      }
+      ['touchstart','click','scroll'].forEach(function(evt) {
+        document.addEventListener(evt, unlockPlay, { once: true, passive: true });
+      });
     })();
   </script>
 
