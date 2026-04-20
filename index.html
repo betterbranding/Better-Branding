@@ -1331,9 +1331,29 @@
         </div>
       </div>
       <div class="intro-right reveal reveal-delay-2">
-        <video id="reel-player" class="intro-video" autoplay muted playsinline webkit-playsinline preload="metadata">
-          <source src="https://betterbranding.github.io/Better-Branding/reel1.mp4" type="video/mp4">
-        </video>
+        <div style="position:relative;">
+          <video id="reel-player" class="intro-video" autoplay muted playsinline webkit-playsinline preload="auto"></video>
+          <!-- Tap-to-play overlay for iOS when autoplay is blocked -->
+          <div id="reel-tap-overlay" style="
+            display:none;
+            position:absolute;inset:0;
+            background:rgba(0,0,0,0.45);
+            border-radius:inherit;
+            justify-content:center;
+            align-items:center;
+            cursor:pointer;
+            z-index:10;
+          ">
+            <div style="
+              width:60px;height:60px;border-radius:50%;
+              background:#FF1C8E;
+              display:flex;align-items:center;justify-content:center;
+              box-shadow:0 0 20px rgba(255,28,142,0.7);
+            ">
+              <svg width="22" height="26" viewBox="0 0 22 26" fill="white"><polygon points="2,1 21,13 2,25"/></svg>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1872,7 +1892,7 @@
   </script>
 
 
-  <!-- Reel auto-cycling -->
+  <!-- Reel auto-cycling (iOS-safe rewrite) -->
   <script>
     (function() {
       var reels = [
@@ -1884,15 +1904,39 @@
       var player = document.getElementById('reel-player');
       if (!player) return;
 
-      // Ensure attributes are set programmatically for iOS
-      player.muted = true;
-      player.setAttribute('muted', '');
-      player.setAttribute('playsinline', '');
-      player.setAttribute('webkit-playsinline', '');
+      // ── iOS fix: remove <source> children; set src directly ──
+      // When HTML is injected via innerHTML (GHL embed), iOS Safari
+      // doesn't pick up <source> children — src on the element is required.
+      while (player.firstChild) player.removeChild(player.firstChild);
+
+      // Force every required attribute as both attribute AND property
+      player.muted        = true;
+      player.defaultMuted = true;   // critical for iOS autoplay
+      player.loop         = false;
+      player.playsInline  = true;
+      player.setAttribute('muted',             '');
+      player.setAttribute('playsinline',       '');
+      player.setAttribute('webkit-playsinline','');
+      player.setAttribute('preload',           'auto');
+
+      // ── Show a tap-to-play overlay on mobile if autoplay is blocked ──
+      var overlay = document.getElementById('reel-tap-overlay');
+
+      function hideOverlay() {
+        if (overlay) overlay.style.display = 'none';
+      }
+      function showOverlay() {
+        if (overlay) overlay.style.display = 'flex';
+      }
 
       function safePlay() {
+        player.muted = true;
         var p = player.play();
-        if (p !== undefined) { p.catch(function(){}); }
+        if (p !== undefined) {
+          p.then(hideOverlay).catch(function() { showOverlay(); });
+        } else {
+          hideOverlay();
+        }
       }
 
       function loadReel(index) {
@@ -1901,36 +1945,42 @@
         player.addEventListener('canplay', function onCan() {
           player.removeEventListener('canplay', onCan);
           safePlay();
-        });
+        }, { once: true });
+        // Hard fallback — try after 1.5 s regardless
+        setTimeout(function() {
+          if (player.paused) safePlay();
+        }, 1500);
       }
 
-      // Initial load — use source already in markup for first reel,
-      // but kick off load() so canplay fires
-      player.load();
-      player.addEventListener('canplay', function onFirst() {
-        player.removeEventListener('canplay', onFirst);
-        safePlay();
-      });
+      // Load reel 1 immediately
+      loadReel(0);
 
-      // If already has enough data, play immediately
-      if (player.readyState >= 3) safePlay();
-
-      // Cycle reels on end
+      // Cycle on end
       player.addEventListener('ended', function() {
         current = (current + 1) % reels.length;
         loadReel(current);
       });
 
-      // Mobile unlock: any interaction kicks off play
+      // iOS user-gesture unlock — fires on first interaction anywhere
       function unlockPlay() {
-        if (player.paused) {
-          player.muted = true;
-          safePlay();
-        }
+        player.muted = true;
+        if (player.paused) safePlay();
+        // If src not yet set somehow, restart
+        if (!player.src) loadReel(0);
       }
-      ['touchstart','click','scroll'].forEach(function(evt) {
-        document.addEventListener(evt, unlockPlay, { once: true, passive: true });
-      });
+      document.addEventListener('touchstart', unlockPlay, { once: true, passive: true });
+      document.addEventListener('click',      unlockPlay, { once: true, passive: true });
+
+      // Tap on the overlay itself
+      if (overlay) {
+        overlay.addEventListener('click', function() {
+          unlockPlay();
+        });
+        overlay.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          unlockPlay();
+        }, { passive: false });
+      }
     })();
   </script>
 
