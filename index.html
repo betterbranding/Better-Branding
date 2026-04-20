@@ -1269,6 +1269,7 @@
   /* ── Greg frame ── */
   .about-greg-frame {
     position: relative;
+    margin-bottom: 2.5rem;
   }
   .about-greg-frame::before {
     content: '';
@@ -1281,7 +1282,7 @@
   }
   .about-greg-badge {
     position: absolute;
-    bottom: -18px;
+    bottom: 16px;
     left: 24px;
     background: rgba(10,10,10,0.85);
     backdrop-filter: blur(12px);
@@ -1308,9 +1309,8 @@
   }
   .about-greg-img {
     width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    object-position: center top;
+    height: auto;
+    object-fit: contain;
     border-radius: 24px;
     display: block;
     position: relative;
