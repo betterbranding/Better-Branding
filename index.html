@@ -859,10 +859,18 @@
     }
     .results-photo-frame img {
       width: 100%;
-      height: 560px;
+      height: auto;
+      max-height: 580px;
       object-fit: cover;
       object-position: top center;
       display: block;
+    }
+    @media (max-width: 768px) {
+      .results-photo-frame img {
+        max-height: none;
+        height: auto;
+        object-fit: contain;
+      }
     }
     .service-grid {
       display: grid;
