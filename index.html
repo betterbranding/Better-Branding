@@ -844,10 +844,9 @@
       margin: 0 auto;
     }
     .results-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 3rem;
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
       margin-top: 3rem;
     }
     .results-photo-frame {
@@ -856,6 +855,14 @@
       border: 2px solid rgba(0,229,255,0.4);
       box-shadow: 0 0 40px rgba(0,229,255,0.15), 0 20px 60px rgba(0,0,0,0.1);
       position: relative;
+      max-width: 360px;
+    }
+
+    .results-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,31,142,0.5), rgba(0,229,255,0.3), transparent);
+      margin: 3rem 0;
     }
     .results-photo-frame img {
       width: 100%;
@@ -876,7 +883,7 @@
     }
     .service-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
     }
     .svc-card {
@@ -926,18 +933,17 @@
       background: rgba(0,229,255,0.12);
       border: 1px solid rgba(0,229,255,0.3);
       backdrop-filter: blur(16px);
-      grid-column: span 2;
+      grid-column: span 3;
     }
     .svc-cyan h4 { color: var(--black); }
     .svc-cyan:hover { box-shadow: 0 8px 30px var(--cyan-glow); }
 
     @media (max-width: 900px) {
-      .results-layout { grid-template-columns: 1fr; }
-      .results-photo-frame img { height: 360px; }
+      .results-photo-frame img { height: auto; max-width: 100%; }
     }
     @media (max-width: 560px) {
-      .service-grid { grid-template-columns: 1fr; }
-      .svc-cyan { grid-column: span 1; }
+      .service-grid { grid-template-columns: 1fr 1fr; }
+      .svc-cyan { grid-column: span 2; }
     }
 
     /* ==============================
@@ -1269,7 +1275,6 @@
   /* ── Greg frame ── */
   .about-greg-frame {
     position: relative;
-    margin-bottom: 2.5rem;
   }
   .about-greg-frame::before {
     content: '';
@@ -1634,6 +1639,7 @@
           <span class="badge-title">Founder &amp; CMO</span>
         </div>
         </div>
+        <div class="results-divider"></div>
         <div class="service-grid reveal reveal-delay-2">
           <div class="svc-card svc-white tilt-card">
             <h4>Branding &amp; StoryTelling</h4>
