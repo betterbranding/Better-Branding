@@ -866,16 +866,12 @@
       display: block;
     }
     @media (max-width: 768px) {
-      .results-photo-frame {
-        aspect-ratio: 4 / 5;
-        overflow: hidden;
-      }
       .results-photo-frame img {
         width: 100%;
-        height: 100%;
+        height: auto;
         max-height: none;
-        object-fit: cover;
-        object-position: top center;
+        object-fit: unset;
+        display: block;
       }
     }
     .service-grid {
