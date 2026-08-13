@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>School Run: Google Earth</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+      "3d-tiles-renderer": "https://cdn.jsdelivr.net/npm/3d-tiles-renderer@0.5.1/build/index.js",
+      "3d-tiles-renderer/plugins": "https://cdn.jsdelivr.net/npm/3d-tiles-renderer@0.5.1/build/index.plugins.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <div id="hud">
+    <div id="topbar">
+      <div class="panel" id="modeToggle">
+        <button id="btnDrive" class="active">Drive</button>
+        <button id="btnExplore">3D Map</button>
+      </div>
+      <div class="panel chip" id="clockChip"><span id="clock" class="val">7:05 AM</span></div>
+      <div class="panel chip" id="bellChip">Tardy bell <span class="val">7:35</span></div>
+      <div class="panel chip kidchip" id="kid1">Kid 1 <span class="val">&#10003;</span></div>
+      <div class="panel chip kidchip" id="kid2">Kid 2 <span class="val">&#10003;</span></div>
+    </div>
+
+    <div class="panel" id="instr">
+      <div id="instrIcon">&#8593;</div>
+      <div>
+        <div id="instrDist"></div>
+        <div id="instrMain">Head south on Quality Hill St</div>
+        <div id="instrThen"></div>
+      </div>
+    </div>
+
+    <div class="panel" id="hint">
+      <b>&#8593;</b> boost &nbsp;<b>&#8595;</b> brake &nbsp;<b>Space</b> pause<br/>
+      In 3D Map mode: drag to orbit, scroll to zoom
+    </div>
+
+    <div class="panel" id="minimapWrap"><canvas id="minimap" width="200" height="130"></canvas></div>
+
+    <div class="panel" id="speedo">
+      <div id="mph">0</div>
+      <div id="mphLabel">MPH</div>
+      <div id="multRow">
+        <button data-m="1" class="active">1x</button>
+        <button data-m="2">2x</button>
+        <button data-m="4">4x</button>
+      </div>
+    </div>
+
+    <div class="panel" id="progressWrap">
+      <div id="progressLabel"><span>Home</span><span>CES</span><span>CMS</span></div>
+      <div id="progressTrack">
+        <div id="progressFill"></div>
+        <div class="pip" id="pip1" style="left:86%">1</div>
+        <div class="pip" id="pip2" style="left:100%">2</div>
+      </div>
+    </div>
+
+    <div id="attrib">Photorealistic 3D Tiles &middot; Map data &amp; imagery &copy; Google</div>
+  </div>
+
+  <div class="overlay" id="startOverlay">
+    <div class="card">
+      <div class="kicker">The Solomon Morning Run</div>
+      <h1>SCHOOL RUN <span style="color:#FF0099">GOOGLE EARTH</span></h1>
+      <div class="sub">6000 Quality Hill Rd &rarr; Colleyville Elementary &rarr; Colleyville Middle.<br/>Photorealistic Google Earth 3D. Beat the 7:27 bell.</div>
+      <div class="statrow">
+        <div class="stat"><div class="v">2.5 mi</div><div class="k">Total</div></div>
+        <div class="stat"><div class="v">~8 min</div><div class="k">Drive</div></div>
+        <div class="stat"><div class="v">7:27</div><div class="k">Warning bell</div></div>
+        <div class="stat"><div class="v">7:35</div><div class="k">Tardy bell</div></div>
+      </div>
+      <div class="btnrow">
+        <button class="btn" id="btnStart">Start the run</button>
+        <button class="btn ghost" id="btnStartExplore">Explore 3D map</button>
+      </div>
+      <div id="loadingNote">Streaming Google Earth&hellip;</div>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="ckptOverlay">
+    <div class="card">
+      <div class="kicker">Drop-off 1 of 2</div>
+      <h2>Colleyville Elementary</h2>
+      <div class="sub">5911 Pleasant Run Rd &middot; Car rider line</div>
+      <ul class="rules">
+        <li>Use the <b>south car rider entrance</b> off Pleasant Run Rd, the middle drive is <b>bus/staff only</b></li>
+        <li>Use whichever lane is open, <b>two lanes merge into one</b> after the turn</li>
+        <li>Drop-off is a <b>single lane</b>, do not pass traffic</li>
+        <li>Kid exits on the <b>passenger side</b>, you stay in the car</li>
+        <li><b>No cell phone use</b> in the school zone</li>
+        <li>Warning bell <b>7:27</b> &middot; Tardy bell <b>7:35</b> &middot; Pickup at <b>3:05</b></li>
+      </ul>
+      <div class="btnrow">
+        <button class="btn" id="btnResume">Kid 1 delivered, roll on</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="endOverlay">
+    <div class="card">
+      <div class="kicker">Mission complete</div>
+      <h2>Both kids delivered</h2>
+      <div class="sub">Drop-off 2: Colleyville Middle School, 1100 Bogart Dr, tucked right behind the elementary via the campus drive.</div>
+      <div class="statrow">
+        <div class="stat"><div class="v" id="endDist">2.5 mi</div><div class="k">Driven</div></div>
+        <div class="stat"><div class="v" id="endTime">--</div><div class="k">Drive time</div></div>
+        <div class="stat"><div class="v" id="endArrive">--</div><div class="k">Arrived</div></div>
+        <div class="stat"><div class="v" id="endMargin">--</div><div class="k">Before bell</div></div>
+      </div>
+      <div class="btnrow">
+        <button class="btn" id="btnRestart">Drive it again</button>
+        <button class="btn ghost" id="btnEndExplore">Explore 3D map</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./data.js"></script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

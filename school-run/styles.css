@@ -1,0 +1,137 @@
+html, body {
+  margin: 0; padding: 0; width: 100%; height: 100%;
+  overflow: hidden; background: #0b0e14;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  -webkit-user-select: none; user-select: none;
+}
+#scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* ---------- HUD ---------- */
+#hud { position: absolute; inset: 0; pointer-events: none; }
+.panel {
+  background: rgba(10, 12, 20, 0.72);
+  border: 1px solid rgba(255, 0, 153, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  backdrop-filter: blur(8px);
+  color: #fff;
+}
+
+#topbar {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px; align-items: center; pointer-events: auto;
+}
+.chip {
+  padding: 7px 14px; font-size: 13px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.chip .val { color: #ff2fae; }
+.kidchip { opacity: 0.5; }
+.kidchip.done { opacity: 1; border-color: rgba(80,220,140,0.7); }
+.kidchip.done .val { color: #55e39a; }
+
+#modeToggle { display: flex; gap: 0; overflow: hidden; padding: 0; }
+#modeToggle button {
+  border: 0; background: transparent; color: #aab; padding: 8px 14px;
+  font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer;
+}
+#modeToggle button.active { background: #ff0099; color: #fff; }
+
+/* instruction card */
+#instr {
+  position: absolute; top: 64px; left: 16px; padding: 12px 16px;
+  display: flex; gap: 14px; align-items: center; max-width: 340px;
+}
+#instrIcon {
+  font-size: 30px; font-weight: 900; color: #ff2fae; width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,0,153,0.12); border-radius: 10px; flex: 0 0 44px;
+}
+#instrMain { font-size: 16px; font-weight: 800; line-height: 1.25; }
+#instrDist { font-size: 12px; font-weight: 700; color: #ff8fd0; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+#instrThen { font-size: 12px; color: #99a; margin-top: 3px; }
+
+/* speedometer */
+#speedo {
+  position: absolute; right: 16px; bottom: 52px; padding: 12px 18px; text-align: center;
+  pointer-events: auto;
+}
+#mph { font-size: 40px; font-weight: 900; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+#mphLabel { font-size: 11px; font-weight: 800; letter-spacing: 2px; color: #ff2fae; margin-top: 2px; }
+#multRow { display: flex; gap: 6px; margin-top: 8px; justify-content: center; }
+#multRow button {
+  border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
+  color: #cbd; font-size: 11px; font-weight: 800; border-radius: 7px; padding: 4px 9px; cursor: pointer;
+}
+#multRow button.active { background: #ff0099; border-color: #ff0099; color: #fff; }
+
+/* minimap */
+#minimapWrap { position: absolute; left: 16px; bottom: 52px; padding: 8px; }
+#minimap { display: block; border-radius: 8px; }
+
+/* progress */
+#progressWrap {
+  position: absolute; left: 50%; transform: translateX(-50%); bottom: 14px;
+  width: min(560px, 60vw); padding: 9px 16px 11px;
+}
+#progressLabel { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #99a; text-transform: uppercase; margin-bottom: 6px; }
+#progressTrack { position: relative; height: 8px; background: rgba(255,255,255,0.12); border-radius: 99px; }
+#progressFill { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; background: linear-gradient(90deg, #ff0099, #ff5fc0); border-radius: 99px; }
+.pip {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #1a1e2c; border: 2px solid #556; color: #889;
+  font-size: 9px; font-weight: 900; display: flex; align-items: center; justify-content: center;
+}
+.pip.done { border-color: #55e39a; color: #55e39a; }
+
+#attrib {
+  position: absolute; right: 8px; bottom: 4px; font-size: 10px; color: rgba(255,255,255,0.55);
+  background: rgba(0,0,0,0.35); padding: 2px 7px; border-radius: 6px;
+}
+
+#hint {
+  position: absolute; right: 16px; top: 64px; padding: 9px 13px; font-size: 11px; color: #aab;
+  line-height: 1.6; max-width: 210px;
+}
+#hint b { color: #ff8fd0; }
+
+/* ---------- overlays ---------- */
+.overlay {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(6, 8, 14, 0.66); backdrop-filter: blur(4px); z-index: 20;
+}
+.overlay.hidden { display: none; }
+.card {
+  width: min(480px, 88vw); padding: 30px 34px; text-align: center;
+  background: rgba(12, 14, 24, 0.92);
+  border: 1px solid rgba(255, 0, 153, 0.5); border-radius: 20px;
+  box-shadow: 0 20px 70px rgba(0,0,0,0.6), 0 0 60px rgba(255,0,153,0.12);
+  color: #fff;
+}
+.card .kicker { font-size: 12px; font-weight: 800; letter-spacing: 3px; color: #ff2fae; text-transform: uppercase; }
+.card h1 { margin: 8px 0 4px; font-size: 34px; font-weight: 900; letter-spacing: 1px; }
+.card h2 { margin: 6px 0 2px; font-size: 24px; font-weight: 900; }
+.card .sub { color: #aab; font-size: 14px; margin-top: 6px; line-height: 1.5; }
+.statrow { display: flex; gap: 10px; justify-content: center; margin: 18px 0 4px; flex-wrap: wrap; }
+.stat {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 9px 15px; min-width: 84px;
+}
+.stat .v { font-size: 19px; font-weight: 900; color: #ff5fc0; }
+.stat .k { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #99a; text-transform: uppercase; margin-top: 2px; }
+.rules { text-align: left; margin: 16px auto 4px; font-size: 13.5px; line-height: 1.75; color: #dde; max-width: 380px; }
+.rules li { margin-bottom: 3px; }
+.rules b { color: #ffd34d; }
+.btnrow { display: flex; gap: 12px; justify-content: center; margin-top: 22px; flex-wrap: wrap; }
+.btn {
+  border: 0; border-radius: 12px; padding: 13px 26px; font-size: 15px; font-weight: 800;
+  letter-spacing: 0.5px; cursor: pointer; color: #fff;
+  background: linear-gradient(135deg, #ff0099, #d1007e);
+  box-shadow: 0 6px 22px rgba(255,0,153,0.4);
+}
+.btn:hover { filter: brightness(1.12); }
+.btn.ghost { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); box-shadow: none; }
+
+#loadingNote { margin-top: 14px; font-size: 12px; color: #778; }
