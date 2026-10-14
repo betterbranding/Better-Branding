@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Save Your Seat | Better DRIPBaR Strategy</title>
+<meta name="description" content="Live strategy call for DRIPBaR owners. Thursday, October 15 at 2:30 PM CT on Google Meet.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Better DRIPBaR Strategy | Save Your Seat">
+<meta property="og:description" content="Live strategy call for DRIPBaR owners. Thursday, Oct 15 at 2:30 PM CT on Google Meet.">
+<meta property="og:image" content="https://betterbranding.github.io/Better-Branding/strategy/assets/og.jpg">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#FF0099;--pink-d:#D6007F;--pink-soft:rgba(255,0,153,.12);--ink:#0a0a0a;--card:#141414;--card2:#1b1b1b;--line:#2a2a2a;--mute:#9a9a9a;--white:#fff;--bebas:'Bebas Neue','Arial Narrow',Arial,sans-serif;--inter:'Inter',Helvetica,Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font:400 16px/1.6 var(--inter);color:var(--white);background:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh;background-image:radial-gradient(900px 500px at 85% -10%,rgba(255,0,153,.18),transparent 60%),radial-gradient(700px 500px at -10% 110%,rgba(255,0,153,.10),transparent 60%)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.top{display:flex;justify-content:center;padding:34px 0 26px}
+.top img{width:132px;height:auto}
+
+/* ===== WIDGET ===== */
+.bw{display:grid;grid-template-columns:340px 1fr;background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 50px 100px -50px rgba(255,0,153,.35);min-height:620px}
+.side{position:relative;background:#000;padding:34px 30px 30px;display:flex;flex-direction:column;gap:26px;overflow:hidden;border-right:1px solid var(--line)}
+.side::before{content:"";position:absolute;right:-120px;top:-120px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,0,153,.35),transparent 65%);pointer-events:none}
+.side::after{content:"";position:absolute;left:-30%;bottom:-35%;width:130%;height:80%;background:repeating-radial-gradient(circle at center,rgba(255,255,255,.05) 0 2px,transparent 2px 80px);pointer-events:none}
+.side>*{position:relative;z-index:1}
+.live{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;font:700 11px/1 var(--inter);letter-spacing:2.5px;text-transform:uppercase;color:var(--pink);border:1px solid rgba(255,0,153,.45);border-radius:99px;padding:8px 14px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 0 rgba(255,0,153,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,0,153,.6)}70%{box-shadow:0 0 0 9px rgba(255,0,153,0)}100%{box-shadow:0 0 0 0 rgba(255,0,153,0)}}
+.side h1{font:400 44px/.95 var(--bebas);letter-spacing:1px;margin-top:-6px}
+.side h1 span{color:var(--pink)}
+.ev{display:flex;flex-direction:column;gap:12px}
+.ev div{display:flex;gap:12px;align-items:center;font:500 14.5px/1.3 var(--inter);color:#e6e6e6}
+.ev .isq{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.07);display:grid;place-items:center;flex:none;color:var(--pink)}
+.ev .isq svg{width:17px;height:17px}
+.steps{list-style:none;display:flex;flex-direction:column}
+.step{display:flex;gap:14px;align-items:flex-start;position:relative;padding-bottom:20px}
+.step:last-child{padding-bottom:0}
+.step::before{content:"";position:absolute;left:16px;top:36px;bottom:2px;width:2px;background:rgba(255,255,255,.12)}
+.step:last-child::before{display:none}
+.step .n{width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,255,255,.25);display:grid;place-items:center;font:400 17px/1 var(--bebas);letter-spacing:.5px;flex:none;background:#000;transition:all .35s;z-index:1}
+.step .n svg{display:none;width:15px;height:15px;stroke-width:2.6}
+.step .t{padding-top:4px}
+.step .t b{display:block;font:600 14px/1.2 var(--inter);color:rgba(255,255,255,.55);transition:color .3s}
+.step .t span{display:block;font:400 12.5px/1.4 var(--inter);color:rgba(255,255,255,.45);margin-top:3px;min-height:17px}
+.step.on .n{border-color:var(--pink);background:var(--pink);color:#fff;box-shadow:0 0 0 6px rgba(255,0,153,.2)}
+.step.on .t b{color:#fff}
+.step.done .n{border-color:var(--pink)}
+.step.done .n span{display:none}.step.done .n svg{display:block;color:var(--pink)}
+.step.done .t b{color:#fff}.step.done .t span{color:var(--pink)}
+.step.done::before{background:var(--pink)}
+.help{margin-top:auto;font:500 13px/1.45 var(--inter);color:rgba(255,255,255,.6)}
+.help a{color:#fff;border-bottom:1px solid rgba(255,0,153,.6)}
+
+.main{padding:40px 44px;display:flex;flex-direction:column;min-width:0}
+.mprog{display:none}
+.pane{display:none;flex:1;flex-direction:column}
+.pane.on{display:flex;animation:in .45s cubic-bezier(.2,.8,.2,1)}
+.pane.back{animation:back .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+@keyframes back{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.kick{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;font:600 12.5px/1 var(--inter);padding:9px 14px;border-radius:99px;background:var(--pink-soft);color:var(--pink);margin-bottom:16px}
+.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pink)}
+.main h2{font:400 clamp(32px,3.4vw,46px)/1 var(--bebas);letter-spacing:.8px}
+.main h2 span{color:var(--pink)}
+.lede{color:var(--mute);margin-top:8px;font-size:15px;max-width:560px}
+.body{margin-top:26px;flex:1}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;padding-top:22px;border-top:1px solid var(--line)}
+.bk{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 var(--inter);color:var(--mute);padding:10px 4px;transition:color .25s}
+.bk:hover{color:#fff}
+.bk svg{width:16px;height:16px;stroke-width:2.2}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 15.5px/1 var(--inter);padding:17px 30px;border-radius:99px;transition:all .25s;white-space:nowrap}
+.btn svg{width:17px;height:17px;stroke-width:2.4}
+.btn-p{background:var(--pink);color:#fff;box-shadow:0 12px 28px -10px rgba(255,0,153,.75)}
+.btn-p:hover{background:var(--pink-d);transform:translateY(-1px)}
+.btn-p[disabled]{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-g{background:transparent;color:#fff;border:2px solid var(--line)}
+.btn-g:hover{border-color:var(--pink)}
+.btn.busy{pointer-events:none;opacity:.8}
+.btn.busy .lbl{opacity:0}
+.btn{position:relative}
+.btn.busy::after{content:"";position:absolute;width:20px;height:20px;border-radius:50%;border:3px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hint{font:500 13px/1.4 var(--inter);color:var(--mute)}
+
+/* focus tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tile{position:relative;text-align:left;background:var(--card2);border:2px solid transparent;border-radius:20px;padding:20px 18px 18px;display:flex;flex-direction:column;gap:14px;min-height:138px;transition:transform .25s,border-color .25s,background .25s,box-shadow .25s}
+.tile:hover{transform:translateY(-3px);border-color:#3a3a3a;background:#202020}
+.tile .isq{width:46px;height:46px;border-radius:13px;background:#0f0f0f;color:var(--pink);display:grid;place-items:center;transition:all .25s}
+.tile b{display:block;font:400 23px/1 var(--bebas);letter-spacing:.6px;color:#fff}
+.tile b em{font-style:normal;color:var(--pink)}
+.tile .sub{display:block;font:400 12.5px/1.4 var(--inter);color:var(--mute);margin-top:5px}
+.tile .chk{position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;background:var(--pink);display:grid;place-items:center;opacity:0;transform:scale(.6);transition:all .25s}
+.tile .chk svg{width:13px;height:13px;stroke:#fff;stroke-width:3.2}
+.tile.sel{border-color:var(--pink);background:#1f1018;box-shadow:0 18px 34px -20px rgba(255,0,153,.55)}
+.tile.sel .isq{background:var(--pink);color:#fff}
+.tile.sel .chk{opacity:1;transform:scale(1)}
+
+/* form */
+.chip{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font:600 13px/1 var(--inter);color:var(--pink);background:var(--pink-soft);border-radius:99px;padding:8px 13px 8px 10px;margin-top:14px}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--pink)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fld{display:flex;flex-direction:column;gap:7px}
+.fld.full{grid-column:1/-1}
+.fld label{font:600 13px/1 var(--inter);color:#ddd}
+.fld label small{font-weight:500;color:var(--mute)}
+.fld input{width:100%;font:400 15.5px/1.2 var(--inter);color:#fff;background:var(--card2);border:2px solid transparent;border-radius:16px;padding:16px 18px;outline:none;transition:border-color .25s,background .25s,box-shadow .25s;-webkit-appearance:none}
+.fld input::placeholder{color:#6f6f6f}
+.fld input:focus{background:#101010;border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,0,153,.14)}
+.fld .msg{display:none;font:500 12px/1.3 var(--inter);color:#ff6b8a}
+.fld.err input{border-color:#ff4d6d}
+.fld.err .msg{display:block}
+.consent{grid-column:1/-1;position:relative;display:flex;gap:14px;align-items:flex-start;background:var(--card2);border:2px solid transparent;border-radius:18px;padding:16px 18px;cursor:pointer;transition:border-color .25s}
+.consent:hover{border-color:#3a3a3a}
+.consent.on{border-color:var(--pink)}
+.consent.err{border-color:#ff4d6d}
+.consent input{position:absolute;opacity:0;pointer-events:none}
+.consent .box{width:26px;height:26px;border-radius:8px;border:2px solid #555;display:grid;place-items:center;flex:none;transition:all .25s;margin-top:1px}
+.consent .box svg{width:14px;height:14px;stroke:#fff;stroke-width:3.2;opacity:0;transform:scale(.5);transition:all .2s}
+.consent.on .box{background:var(--pink);border-color:var(--pink)}
+.consent.on .box svg{opacity:1;transform:scale(1)}
+.consent p{font:400 13px/1.55 var(--inter);color:#cfcfcf}
+.errbox{display:none;margin-top:16px;background:rgba(255,77,109,.1);border:1px solid rgba(255,77,109,.5);color:#ffb3c1;border-radius:14px;padding:14px 16px;font:500 14px/1.5 var(--inter)}
+.errbox.show{display:block}
+.errbox a{color:#fff;border-bottom:1px solid #ff4d6d}
+
+/* state: full / loading */
+.note{background:var(--card2);border-radius:20px;padding:26px 24px;text-align:center;color:var(--mute)}
+.note b{display:block;font:400 26px/1.1 var(--bebas);letter-spacing:.6px;color:#fff;margin-bottom:6px}
+
+/* confirmation */
+.done-top{display:flex;align-items:center;gap:16px}
+.badge{width:60px;height:60px;border-radius:50%;background:var(--pink);display:grid;place-items:center;flex:none;box-shadow:0 0 0 10px rgba(255,0,153,.15);animation:pop .6s cubic-bezier(.2,.8,.2,1)}
+.badge svg{width:28px;height:28px;stroke:#fff;stroke-width:3}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+.tix{margin-top:26px;background:#000;border:1px solid var(--pink);border-radius:22px;padding:22px 24px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.tix small{display:block;font:700 11px/1 var(--inter);letter-spacing:2.5px;text-transform:uppercase;color:var(--pink)}
+.tix b{display:block;font:400 30px/1 var(--bebas);letter-spacing:.7px;margin-top:8px}
+.tix span{display:block;font:500 14px/1.4 var(--inter);color:#cfcfcf;margin-top:6px}
+.tix span a{color:#fff;border-bottom:1px solid rgba(255,0,153,.6)}
+.adds{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.adds .btn{padding:13px 20px;font-size:14px}
+.notes{margin-top:22px;display:flex;gap:16px;align-items:center;background:linear-gradient(135deg,rgba(255,0,153,.16),rgba(255,0,153,.04));border:1px solid rgba(255,0,153,.35);border-radius:20px;padding:20px 22px}
+.notes .isq{width:50px;height:50px;border-radius:14px;background:var(--pink);color:#fff;display:grid;place-items:center;flex:none}
+.notes b{display:block;font:400 26px/1.05 var(--bebas);letter-spacing:.6px}
+.notes span{display:block;font:500 14.5px/1.45 var(--inter);color:#e6e6e6;margin-top:3px}
+.reel{margin-top:22px;display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:center;background:var(--card2);border-radius:20px;padding:14px}
+.reel img{border-radius:12px;width:100%}
+.reel b{display:block;font:400 22px/1 var(--bebas);letter-spacing:.6px}
+.reel span{display:block;font:400 13.5px/1.45 var(--inter);color:var(--mute);margin-top:5px}
+.reel em{font-style:normal;color:var(--pink);font-weight:600}
+
+.pfoot{text-align:center;color:#6f6f6f;font-size:12.5px;padding:28px 0 50px}
+.pfoot a{color:#9a9a9a}
+
+@media (max-width:900px){
+  .bw{grid-template-columns:1fr;border-radius:24px}
+  .side{border-right:0;border-bottom:1px solid var(--line);padding:26px 22px 22px;gap:18px}
+  .side h1{font-size:38px}
+  .steps,.help{display:none}
+  .ev{flex-direction:row;flex-wrap:wrap;gap:10px 18px}
+  .ev div{font-size:13.5px}
+  .ev .isq{width:30px;height:30px;border-radius:9px}
+  .main{padding:24px 20px 26px}
+  .mprog{display:block;margin-bottom:20px}
+  .mprog .bar{height:5px;border-radius:99px;background:#262626;overflow:hidden}
+  .mprog .bar i{display:block;height:100%;width:33%;background:var(--pink);border-radius:99px;transition:width .4s}
+  .mprog .txt{font:600 12px/1 var(--inter);color:var(--mute);margin-top:9px;letter-spacing:.4px}
+  .tiles{grid-template-columns:1fr 1fr;gap:10px}
+  .tile{min-height:0;padding:16px 14px 15px;gap:10px}
+  .tile .isq{width:40px;height:40px}
+  .tile b{font-size:20px}
+  .tile .sub{font-size:12px}
+  .form{grid-template-columns:1fr}
+  .foot{flex-direction:column-reverse;align-items:stretch}
+  .foot .btn{width:100%}
+  .foot .bk{justify-content:center}
+  .tix{grid-template-columns:1fr}
+  .reel{grid-template-columns:1fr}
+}
+@media (max-width:380px){.tiles{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.2a1.6 1.6 0 0 0 1.6-1.2l1.7-7.3H6.3"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 16.5s-4-2.4-4-5.2A2.2 2.2 0 0 1 12 10a2.2 2.2 0 0 1 4 1.3c0 2.8-4 5.2-4 5.2z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13.5" height="12" rx="2.5"/><path d="m16 10.5 5.5-3.2v9.4L16 13.5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13.5" height="12" rx="2.5"/><path d="m16 10.5 5.5-3.2v9.4L16 13.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5.5 3.5-5.5 3.5z"/></symbol>
+</svg>
+
+<div class="wrap">
+  <div class="top"><a href="https://thebetterbranding.com"><img src="assets/better-logo.png" width="132" height="68" alt="better"></a></div>
+
+  <div class="bw" id="bw">
+    <aside class="side">
+      <span class="live"><i></i>Live strategy call</span>
+      <h1>Better DRIPBaR <span>Strategy</span></h1>
+      <div class="ev">
+        <div><span class="isq"><svg class="i"><use href="#i-cal"/></svg></span>Thursday, October 15</div>
+        <div><span class="isq"><svg class="i"><use href="#i-clock"/></svg></span>2:30 PM CT</div>
+        <div><span class="isq"><svg class="i"><use href="#i-cam"/></svg></span>Google Meet</div>
+      </div>
+      <ol class="steps">
+        <li class="step on" data-s="1"><span class="n"><span>1</span><svg class="i"><use href="#i-check"/></svg></span><span class="t"><b>Your focus</b><span id="sub1">What you need most</span></span></li>
+        <li class="step" data-s="2"><span class="n"><span>2</span><svg class="i"><use href="#i-check"/></svg></span><span class="t"><b>Your details</b><span id="sub2">So we can send the link</span></span></li>
+        <li class="step" data-s="3"><span class="n"><span>3</span><svg class="i"><use href="#i-check"/></svg></span><span class="t"><b>You're in</b><span id="sub3">&nbsp;</span></span></li>
+      </ol>
+      <p class="help">Questions? Email <a href="mailto:greg@thebetterbranding.com">greg@thebetterbranding.com</a></p>
+    </aside>
+
+    <main class="main">
+      <div class="mprog"><div class="bar"><i id="mpbar"></i></div><div class="txt" id="mptxt">STEP 1 OF 2</div></div>
+
+      <!-- STEP 1 -->
+      <section class="pane on" id="p1">
+        <span class="kick">Step 1</span>
+        <h2>What do you need the <span>most</span> help with?</h2>
+        <p class="lede">Pick one. We'll make sure the call covers it.</p>
+        <div class="body">
+          <div class="tiles" id="tiles"></div>
+        </div>
+        <div class="foot">
+          <span class="hint" id="h1">Tap one to continue</span>
+          <button class="btn btn-p" id="next1" disabled><span class="lbl">Continue</span><svg class="i"><use href="#i-arrow"/></svg></button>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="pane" id="p2">
+        <span class="kick">Step 2</span>
+        <h2>Save your <span>seat</span></h2>
+        <p class="lede">We'll email your confirmation and the Google Meet link.</p>
+        <span class="chip" id="chip"><i></i><span></span></span>
+        <div class="body">
+          <div id="full" class="note" style="display:none"><b>Seats are closed</b>This call is full or has already started. Email <a href="mailto:greg@thebetterbranding.com" style="color:#fff;border-bottom:1px solid #FF0099">greg@thebetterbranding.com</a> and we'll set up a time.</div>
+          <form class="form" id="form" novalidate>
+            <div class="fld"><label for="f-first">First name</label><input id="f-first" autocomplete="given-name" placeholder="First name"><span class="msg">Please enter your first name.</span></div>
+            <div class="fld"><label for="f-last">Last name</label><input id="f-last" autocomplete="family-name" placeholder="Last name"><span class="msg">Please enter your last name.</span></div>
+            <div class="fld"><label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email" inputmode="email" placeholder="you@thedripbar.com"><span class="msg">Please enter a valid email address.</span></div>
+            <div class="fld"><label for="f-phone">Mobile phone</label><input id="f-phone" type="tel" autocomplete="tel-national" inputmode="tel" placeholder="(555) 555-5555"><span class="msg">Please enter a 10 digit phone number.</span></div>
+            <div class="fld full"><label for="f-loc">Your DRIPBaR location <small>(optional)</small></label><input id="f-loc" autocomplete="organization" placeholder="e.g. Frisco"></div>
+            <label class="consent" id="consent"><input type="checkbox" id="f-consent"><span class="box"><svg class="i"><use href="#i-check"/></svg></span><p>I agree to receive emails and texts from Better Branding about this call. Message and data rates may apply. Reply STOP to opt out.</p></label>
+          </form>
+          <div class="errbox" id="err">Something went wrong saving your seat. Please try again, or email <a href="mailto:greg@thebetterbranding.com">greg@thebetterbranding.com</a>.</div>
+        </div>
+        <div class="foot">
+          <button class="bk" id="back2"><svg class="i"><use href="#i-left"/></svg>Back</button>
+          <button class="btn btn-p" id="book"><span class="lbl">Save my seat</span><svg class="i"><use href="#i-arrow"/></svg></button>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="pane" id="p3">
+        <div class="done-top">
+          <span class="badge"><svg class="i"><use href="#i-check"/></svg></span>
+          <div><h2 id="done-h">You're in</h2><p class="lede" id="done-p" style="margin-top:4px">Your confirmation is on its way.</p></div>
+        </div>
+        <div class="tix">
+          <div>
+            <small>Better DRIPBaR Strategy</small>
+            <b>Thursday, Oct 15 at 2:30 PM CT</b>
+            <span>Google Meet: <a id="meet" href="https://meet.google.com/rpe-qpdn-fzf" target="_blank" rel="noopener">meet.google.com/rpe-qpdn-fzf</a></span>
+            <div class="adds">
+              <a class="btn btn-p" id="gcal" target="_blank" rel="noopener"><svg class="i"><use href="#i-cal"/></svg><span class="lbl">Add to Google Calendar</span></a>
+              <a class="btn btn-g" id="ical" download="better-dripbar-strategy.ics"><span class="lbl">Apple / Outlook</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="notes">
+          <span class="isq"><svg class="i"><use href="#i-pen"/></svg></span>
+          <div><b>No need to take notes.</b><span>We'll take care of that part too.</span></div>
+        </div>
+        <a class="reel" href="https://assets.cdn.filesafe.space/0VVRkDLqrPF5oqPjdrAT/media/359e7854-ac5c-4497-b171-0c604b46df4f.mp4" target="_blank" rel="noopener">
+          <img src="https://assets.cdn.filesafe.space/0VVRkDLqrPF5oqPjdrAT/media/d5567eef-7241-4b21-b5f5-2e0c35632091.jpg" alt="Watch the reel" loading="lazy">
+          <div><b>Before Thursday</b><span>See 45 seconds of the reels, graphics, emails, sites and ads we build for DRIPBaR owners. <em>Watch the reel</em></span></div>
+        </a>
+      </section>
+    </main>
+  </div>
+
+  <p class="pfoot">Better Branding &middot; <a href="https://thebetterbranding.com">thebetterbranding.com</a></p>
+</div>
+
+<script>
+(function(){
+  /* ===== CONFIG ===== */
+  var CAL_ID='cGpdx54iCurbaOqylduu', LOC_ID='0VVRkDLqrPF5oqPjdrAT';
+  var F_FOCUS='Y9DT3Sto7FfcQ2lCPhGd', K_FOCUS='better_focus';
+  var API='https://backend.leadconnectorhq.com', TZ='America/Chicago';
+  var EVENT_DAY='2026-10-15', EVENT_HHMM='14:30', MINS=60;
+  var MEET='https://meet.google.com/rpe-qpdn-fzf';
+  var TITLE='Better DRIPBaR Strategy';
+  var FOCUS=[
+    {id:'sales', b:'Online <em>sales</em>', sub:'Sell more packages, memberships and offers online', ico:'i-cart'},
+    {id:'meta',  b:'Meta <em>ads</em>', sub:'Ads that bring in new clients, not just likes', ico:'i-target'},
+    {id:'social',b:'Social <em>media</em>', sub:'Consistent posts and reels that sound like you', ico:'i-heart'},
+    {id:'video', b:'Video <em>production</em>', sub:'Reels, interviews and edits that stop the scroll', ico:'i-video'},
+    {id:'email', b:'<em>Emails</em>', sub:'Campaigns and cadences your clients open', ico:'i-mail'},
+    {id:'auto',  b:'Booking + <em>automations</em>', sub:'Booking flows like this one, plus follow ups', ico:'i-bolt'}
+  ];
+  var LABEL={sales:'Better online sales',meta:'Better Meta ads',social:'Better social media',video:'Better video production',email:'Better emails',auto:'Better booking/automations'};
+
+  var $=function(s){return document.querySelector(s)}, $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var state={step:1,focus:null,slot:null,contact:null};
+
+  /* tiles */
+  $('#tiles').innerHTML=FOCUS.map(function(f){return '<button type="button" class="tile" data-id="'+f.id+'"><span class="chk"><svg class="i"><use href="#i-check"/></svg></span><span class="isq"><svg class="i"><use href="#'+f.ico+'"/></svg></span><span><b>'+f.b+'</b><span class="sub">'+f.sub+'</span></span></button>';}).join('');
+  $$('.tile').forEach(function(el){el.addEventListener('click',function(){
+    $$('.tile').forEach(function(t){t.classList.remove('sel')}); el.classList.add('sel');
+    state.focus=el.getAttribute('data-id'); $('#next1').disabled=false; $('#h1').textContent=LABEL[state.focus];
+    $('#sub1').textContent=LABEL[state.focus];
+    setTimeout(function(){go(2)},260);
+  });});
+  $('#next1').addEventListener('click',function(){ if(state.focus) go(2); });
+  $('#back2').addEventListener('click',function(){ go(1,true); });
+
+  /* slot lookup (public free-slots) */
+  function findSlot(){
+    var now=Date.now(), end=now+6*24*3600*1000;
+    return fetch(API+'/calendars/'+CAL_ID+'/free-slots?startDate='+now+'&endDate='+end+'&timezone='+encodeURIComponent(TZ))
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(d){
+        var day=d[EVENT_DAY], s=null;
+        if(day && day.slots){ day.slots.forEach(function(iso){ if(!s && iso.slice(11,16)===EVENT_HHMM) s=iso; }); }
+        state.slot=s; return s;
+      });
+  }
+  var slotReq=findSlot().catch(function(){ state.slot=null; return null; });
+  function showFull(on){ $('#full').style.display=on?'':'none'; $('#form').style.display=on?'none':''; $('#book').style.display=on?'none':''; }
+
+  /* form */
+  var consentEl=$('#consent'), cb=$('#f-consent');
+  cb.addEventListener('change',function(){ consentEl.classList.toggle('on',cb.checked); consentEl.classList.remove('err'); });
+  $$('.fld input').forEach(function(i){ i.addEventListener('input',function(){ i.closest('.fld').classList.remove('err'); }); });
+  $('#f-phone').addEventListener('input',function(e){
+    var d=e.target.value.replace(/\D/g,''); if(d.length===11&&d[0]==='1') d=d.slice(1); d=d.slice(0,10);
+    var f=d; if(d.length>6) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6); else if(d.length>3) f='('+d.slice(0,3)+') '+d.slice(3); else if(d.length) f='('+d;
+    e.target.value=f;
+  });
+  function validate(){
+    var ok=true, first=$('#f-first'), last=$('#f-last'), email=$('#f-email'), phone=$('#f-phone');
+    function bad(el){ el.closest('.fld').classList.add('err'); ok=false; }
+    if(!first.value.trim()) bad(first);
+    if(!last.value.trim()) bad(last);
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) bad(email);
+    var digits=phone.value.replace(/\D/g,''); if(digits.length===11&&digits[0]==='1') digits=digits.slice(1);
+    if(digits.length!==10) bad(phone);
+    if(!cb.checked){ consentEl.classList.add('err'); ok=false; }
+    if(!ok){ var fe=$('.fld.err input, .consent.err'); if(fe){ fe.scrollIntoView({behavior:'smooth',block:'center'}); if(fe.tagName==='INPUT') fe.focus({preventScroll:true}); } return null; }
+    return {first:first.value.trim(), last:last.value.trim(), email:email.value.trim(), phone:digits, loc:$('#f-loc').value.trim()};
+  }
+  function plain(el){ return (el.textContent||'').trim(); }
+  function book(){
+    var c=validate(); if(!c) return;
+    state.contact=c;
+    var btn=$('#book'); btn.classList.add('busy'); $('#err').classList.remove('show');
+    slotReq.then(function(){ if(state.slot) return state.slot; return findSlot(); }).then(function(slot){
+      if(!slot){ btn.classList.remove('busy'); showFull(true); throw 'full'; }
+      var qp={}; try{ new URLSearchParams(location.search).forEach(function(v,k){ qp[k]=v; }); }catch(e){}
+      var booked=new Date().toLocaleString('en-US',{timeZone:TZ,month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+      var src=qp.utm_source||qp.src||'Direct';
+      var notes=['Focus: '+LABEL[state.focus],'DRIPBaR location: '+(c.loc||'Not given'),'Source: '+src,'Booked: '+booked+' CT'].join('\n');
+      var payload={
+        calendar_id:CAL_ID, location_id:LOC_ID,
+        selected_slot:slot, selected_timezone:TZ, Timezone:TZ,
+        first_name:c.first, last_name:c.last, phone:'+1'+c.phone, email:c.email,
+        companyName:c.loc?('The DRIPBaR '+c.loc):'',
+        terms_and_conditions:plain($('#consent p')),
+        title:TITLE+': '+c.first+' '+c.last,
+        description:notes, notes:notes,
+        eventData:{source:location.href, referrer:document.referrer||'', url_params:qp, campaign:qp.utm_campaign||'',
+          page:{url:location.href,title:document.title}, documentURL:location.href, domain:location.hostname,
+          type:'page-visit', pageVisitType:'calendar', parentId:CAL_ID, medium:'calendar', mediumId:CAL_ID, timestamp:Date.now()}
+      };
+      payload[F_FOCUS]=LABEL[state.focus]; payload[K_FOCUS]=LABEL[state.focus];
+      var fd=new FormData(); fd.append('formData',JSON.stringify(payload));
+      return fetch(API+'/appengine/appointment',{method:'POST',body:fd}).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json().catch(function(){return {}}); });
+    }).then(function(){
+      btn.classList.remove('busy'); renderDone(); go(3);
+      try{ window.dataLayer=window.dataLayer||[]; window.dataLayer.push({event:'appointment_booked',booking_type:'better_dripbar_strategy',focus:state.focus}); }catch(e){}
+    }).catch(function(e){
+      if(e==='full') return;
+      btn.classList.remove('busy'); $('#err').classList.add('show'); $('#err').scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  }
+  $('#book').addEventListener('click',book);
+  $('#form').addEventListener('submit',function(e){ e.preventDefault(); book(); });
+
+  /* confirmation */
+  function pad(n){return (n<10?'0':'')+n}
+  function toUTC(d){return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z'}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
+  function renderDone(){
+    var c=state.contact;
+    $('#done-h').innerHTML="You're in, <span>"+esc(c.first)+"</span>";
+    $('#done-p').innerHTML='Your seat is saved. Your confirmation and the Meet link are headed to '+esc(c.email)+'.';
+    var start=new Date(state.slot), end=new Date(start.getTime()+MINS*60000);
+    var desc='Live strategy call for DRIPBaR owners with Greg Solomon, Better Branding.\nJoin on Google Meet: '+MEET;
+    $('#gcal').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(TITLE)+'&dates='+toUTC(start)+'/'+toUTC(end)+'&details='+encodeURIComponent(desc)+'&location='+encodeURIComponent(MEET)+'&ctz='+encodeURIComponent(TZ);
+    var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Better Branding//Strategy Call//EN','BEGIN:VEVENT','UID:'+Date.now()+'@thebetterbranding.com','DTSTAMP:'+toUTC(new Date()),'DTSTART:'+toUTC(start),'DTEND:'+toUTC(end),'SUMMARY:'+TITLE,'LOCATION:'+MEET,'URL:'+MEET,'DESCRIPTION:'+desc.replace(/\n/g,'\\n'),'END:VEVENT','END:VCALENDAR'].join('\r\n');
+    $('#ical').href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
+  }
+
+  /* nav */
+  function go(n,isBack){
+    if(n===2){ slotReq.then(function(s){ showFull(!s); }); $('#chip span').textContent=LABEL[state.focus]; }
+    state.step=n;
+    $$('.pane').forEach(function(p){p.classList.remove('on','back')});
+    var p=$('#p'+n); p.classList.add('on'); if(isBack) p.classList.add('back');
+    $$('.step').forEach(function(s){ var k=+s.getAttribute('data-s'); s.classList.toggle('on',k===n&&n<3); s.classList.toggle('done',k<n||(n===3)); });
+    if(n===3){ $('#sub2').textContent=state.contact.first+' '+state.contact.last; $('#sub3').textContent='Seat saved'; }
+    $('#mpbar').style.width=(n===1?33:n===2?66:100)+'%';
+    $('#mptxt').textContent=n<3?('STEP '+n+' OF 2'):'SEAT SAVED';
+    if(window.innerWidth<900){ var top=$('#bw').getBoundingClientRect().top+window.scrollY-10; if(window.scrollY>top) window.scrollTo({top:top,behavior:'smooth'}); }
+  }
+})();
+</script>
+</body>
+</html>
