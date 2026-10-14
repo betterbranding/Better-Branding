@@ -306,6 +306,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
   /* ===== CONFIG ===== */
   var CAL_ID='cGpdx54iCurbaOqylduu', LOC_ID='0VVRkDLqrPF5oqPjdrAT';
   var F_FOCUS='Y9DT3Sto7FfcQ2lCPhGd', K_FOCUS='better_focus';
+  var F_LOC='NcBEwMsvw6NMnpYC6pQc', K_LOC='dripbar_location';
   var API='https://backend.leadconnectorhq.com', TZ='America/Chicago';
   var EVENT_DAY='2026-10-15', EVENT_HHMM='14:30', MINS=60;
   var MEET='https://meet.google.com/rpe-qpdn-fzf';
@@ -384,7 +385,6 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
         calendar_id:CAL_ID, location_id:LOC_ID,
         selected_slot:slot, selected_timezone:TZ, Timezone:TZ,
         first_name:c.first, last_name:c.last, phone:'+1'+c.phone, email:c.email,
-        companyName:c.loc?('The DRIPBaR '+c.loc):'',
         terms_and_conditions:plain($('#consent p')),
         title:TITLE+': '+c.first+' '+c.last,
         description:notes, notes:notes,
@@ -393,6 +393,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
           type:'page-visit', pageVisitType:'calendar', parentId:CAL_ID, medium:'calendar', mediumId:CAL_ID, timestamp:Date.now()}
       };
       payload[F_FOCUS]=LABEL[state.focus]; payload[K_FOCUS]=LABEL[state.focus];
+      if(c.loc){ payload[F_LOC]=c.loc; payload[K_LOC]=c.loc; }
       var fd=new FormData(); fd.append('formData',JSON.stringify(payload));
       return fetch(API+'/appengine/appointment',{method:'POST',body:fd}).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json().catch(function(){return {}}); });
     }).then(function(){
