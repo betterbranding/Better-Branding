@@ -583,7 +583,7 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
 }));
 
 // timeline
-const svg=document.getElementById('tlsvg'); const W=720,H=340,L=56,R=16,TOP=24,B=48;
+const svg=document.getElementById('tlsvg'); const W=720,H=340,L=78,R=24,TOP=24,B=52;
 const x=m=>L+(W-L-R)*m/12, y=v=>TOP+(H-TOP-B)*(1-v);
 const show={tox:true,prp:true};
 function toxAt(t,iv){let best=0;for(let s=0;s<=12;s+=iv){const d=t-s;if(d<0)continue;let e;if(d<.5)e=d/.5;else if(d<2.6)e=1;else e=Math.max(0,1-(d-2.6)/2.4);best=Math.max(best,e*.95);}return best;}
@@ -594,12 +594,13 @@ function prpAt(t,mt){const sessions=[0,1.25,2.5];if(mt>=1)sessions.push(mt===1?9
 function draw(){
   const iv=+document.getElementById('iv').value, mt=+document.getElementById('mt').value;
   document.getElementById('ivOut').textContent=iv; document.getElementById('mtOut').textContent=mt===0?'None':mt+(mt===1?' session':' sessions');
+  const sm=svg.clientWidth&&svg.clientWidth<520, fs=sm?24:12, fs2=sm?22:11, sw=sm?5:3;
   let s='';
   for(let i=0;i<=4;i++){const v=i/4;s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="#E3D7C8" stroke-dasharray="'+(i?'3 5':'0')+'"/>';}
-  for(let m=0;m<=12;m+=2){s+='<text x="'+x(m)+'" y="'+(H-B+22)+'" text-anchor="middle" font-size="12" fill="#8A7D74">'+(m===0?'Start':m+' mo')+'</text>';}
-  s+='<text x="14" y="'+(TOP+(H-TOP-B)/2)+'" transform="rotate(-90 14 '+(TOP+(H-TOP-B)/2)+')" text-anchor="middle" font-size="12" fill="#8A7D74">Visible change (illustrative)</text>';
-  s+='<text x="'+(L-8)+'" y="'+(y(1)+4)+'" text-anchor="end" font-size="11" fill="#8A7D74">High</text><text x="'+(L-8)+'" y="'+(y(0)+4)+'" text-anchor="end" font-size="11" fill="#8A7D74">None</text>';
-  const path=(f,col,fill)=>{let d='',a='';for(let t=0;t<=12.001;t+=.05){const px=x(t),py=y(f(t));d+=(t?'L':'M')+px.toFixed(1)+' '+py.toFixed(1);}a=d+'L'+x(12)+' '+y(0)+'L'+x(0)+' '+y(0)+'Z';return '<path d="'+a+'" fill="'+fill+'"/><path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>';};
+  for(let m=0;m<=12;m+=2){s+='<text x="'+x(m)+'" y="'+(H-B+22)+'" text-anchor="middle" font-size="'+fs+'" fill="#8A7D74">'+(m===0?'Start':m+(sm?'':' mo'))+'</text>';}
+  s+='<text x="14" y="'+(TOP+(H-TOP-B)/2)+'" transform="rotate(-90 14 '+(TOP+(H-TOP-B)/2)+')" text-anchor="middle" font-size="'+fs+'" fill="#8A7D74">'+(sm?'Visible change':'Visible change (illustrative)')+'</text>';
+  s+='<text x="'+(L-8)+'" y="'+(y(1)+4)+'" text-anchor="end" font-size="'+fs2+'" fill="#8A7D74">High</text><text x="'+(L-8)+'" y="'+(y(0)+4)+'" text-anchor="end" font-size="'+fs2+'" fill="#8A7D74">None</text>';
+  const path=(f,col,fill)=>{let d='',a='';for(let t=0;t<=12.001;t+=.05){const px=x(t),py=y(f(t));d+=(t?'L':'M')+px.toFixed(1)+' '+py.toFixed(1);}a=d+'L'+x(12)+' '+y(0)+'L'+x(0)+' '+y(0)+'Z';return '<path d="'+a+'" fill="'+fill+'"/><path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="'+sw+'" stroke-linejoin="round" stroke-linecap="round"/>';};
   if(show.prp) s+=path(t=>prpAt(t,mt),'#B9592A','rgba(185,89,42,.10)');
   if(show.tox) s+=path(t=>toxAt(t,iv),'#B2475D','rgba(178,71,93,.10)');
   if(show.tox){for(let v=0;v<=12;v+=iv){s+='<circle cx="'+x(v)+'" cy="'+(H-B+4)+'" r="5" fill="#B2475D"/>';}}
@@ -609,6 +610,7 @@ function draw(){
 ['iv','mt'].forEach(id=>document.getElementById(id).addEventListener('input',draw));
 document.querySelectorAll('#lineChips .chip').forEach(b=>b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')==='true';b.setAttribute('aria-pressed',on?'false':'true');show[b.dataset.line]=!on;draw();}));
 draw();
+addEventListener('resize',draw);
 
 // calculator
 const units={frown:20,forehead:20,crows:24}, inc={frown:true,forehead:true,crows:true};
