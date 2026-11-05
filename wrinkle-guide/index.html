@@ -1,0 +1,668 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++<meta charset="utf-8">
++<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
++<meta name="robots" content="noindex, nofollow">
++<title>Smoother, Explained | Botox vs Xeomin vs PRP/PRF</title>
++<meta name="description" content="A clear, side-by-side guide to Botox, Xeomin, and PRP/PRF for wrinkles in your 40s: benefits, risks, medication and supplement checks, cost, and results.">
++<meta property="og:title" content="Smoother, Explained: Botox vs Xeomin vs PRP/PRF">
++<meta property="og:description" content="Benefits, risks, meds and supplements to check, cost, and how well each one works. An easy side-by-side guide.">
++<meta name="theme-color" content="#F6F0E8">
++<link rel="preconnect" href="https://fonts.googleapis.com">
++<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
++<style>
++:root{
++  --paper:#F6F0E8; --paper2:#EFE6DA; --card:#FFFDF9; --ink:#211B18; --ink2:#5B504A; --ink3:#8A7D74; --line:#E3D7C8;
++  --botox:#B2475D; --botox-soft:#F6E3E7;
++  --xeomin:#2F6F6A; --xeomin-soft:#DFEEEC;
++  --prp:#B9592A; --prp-soft:#F7E6DA;
++  --ok:#3D7A4E; --ok-soft:#E3F0E6; --caution:#A86B12; --caution-soft:#F8EDD8; --avoid:#A8322F; --avoid-soft:#F6E0DE;
++  --r:18px; --shadow:0 1px 0 rgba(33,27,24,.04), 0 10px 30px -18px rgba(33,27,24,.25);
++}
++*{box-sizing:border-box}
++html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
++body{margin:0; background:var(--paper); color:var(--ink); font-family:"Figtree",ui-sans-serif,sans-serif; font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased}
++body::before{content:""; position:fixed; inset:0; pointer-events:none; z-index:100; opacity:.35; mix-blend-mode:multiply;
++  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif; font-weight:500; letter-spacing:-.015em; margin:0; line-height:1.1}
+a{color:inherit}
+.wrap{max-width:1160px; margin:0 auto; padding:0 20px}
+.eyebrow{font-size:12px; letter-spacing:.16em; text-transform:uppercase; font-weight:600; color:var(--ink3)}
+section{padding:64px 0; border-top:1px solid var(--line)}
+section h2{font-size:clamp(30px,5vw,46px); margin:10px 0 12px}
+.lede{color:var(--ink2); max-width:720px; font-size:17px}
+.muted{color:var(--ink3)}
+.small{font-size:13.5px}
+em.f{font-family:"Fraunces"; font-style:italic}
+/* nav */
+nav.top{position:sticky; top:0; z-index:50; background:rgba(246,240,232,.88); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex; align-items:center; gap:18px; height:56px}
+nav.top .brand{font-family:"Fraunces"; font-size:19px; font-weight:600; white-space:nowrap; text-decoration:none}
+nav.top .brand i{color:var(--botox)}
+nav.top .links{display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; margin-left:auto}
+nav.top .links::-webkit-scrollbar{display:none}
+nav.top .links a{text-decoration:none; font-size:14px; font-weight:500; color:var(--ink2); padding:7px 11px; border-radius:99px; white-space:nowrap}
+nav.top .links a:hover{background:var(--paper2); color:var(--ink)}
+/* hero */
+.hero{padding:56px 0 40px; border-top:0; position:relative; overflow:hidden}
+.hero h1{font-size:clamp(48px,10vw,108px); font-weight:400; line-height:.95; letter-spacing:-.035em}
+.hero h1 i{font-weight:300; color:var(--botox)}
+.hero .sub{font-size:clamp(17px,2.2vw,21px); color:var(--ink2); max-width:640px; margin:22px 0 0}
+.blob{position:absolute; border-radius:50%; filter:blur(60px); opacity:.45; z-index:-1}
+.trio{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:40px}
+.tcard{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:20px; box-shadow:var(--shadow); position:relative; overflow:hidden; opacity:0; transform:translateY(14px); animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+.tcard:nth-child(2){animation-delay:.1s}.tcard:nth-child(3){animation-delay:.2s}
+@keyframes rise{to{opacity:1; transform:none}}
+.tcard::before{content:""; position:absolute; left:0; top:0; right:0; height:5px; background:var(--c)}
+.tcard .name{font-family:"Fraunces"; font-size:28px}
+.tcard .gen{font-size:13px; color:var(--ink3); margin-bottom:10px}
+.tcard p{margin:0; font-size:15px; color:var(--ink2)}
+.tcard .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px}
+.tag{font-size:12px; font-weight:600; padding:4px 9px; border-radius:99px; background:var(--soft); color:var(--c)}
+.c-botox{--c:var(--botox); --soft:var(--botox-soft)} .c-xeomin{--c:var(--xeomin); --soft:var(--xeomin-soft)} .c-prp{--c:var(--prp); --soft:var(--prp-soft)}
+/* big idea */
+.idea{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px}
+.idea .box{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:24px}
+.idea .box h3{font-size:24px; margin-bottom:6px}
+.idea .box .fix{margin-top:14px; font-size:14px; font-weight:600}
+.line-demo{height:46px; margin:8px 0 6px}
+.callout{margin-top:16px; background:var(--ink); color:#F6F0E8; border-radius:var(--r); padding:20px 24px; display:flex; gap:16px; align-items:flex-start}
+.callout b{color:#F3C9D2}
+.callout .num{font-family:"Fraunces"; font-size:44px; line-height:1; color:#F3C9D2}
+/* chips */
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 16px}
+.chip{appearance:none; border:1.5px solid var(--line); background:var(--card); color:var(--ink2); border-radius:99px; padding:8px 14px; font:600 14px "Figtree"; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:all .15s}
+.chip .dot{width:10px; height:10px; border-radius:50%; background:var(--c,var(--ink3))}
+.chip[aria-pressed="true"]{border-color:var(--c,var(--ink)); background:var(--soft,var(--paper2)); color:var(--ink)}
+.chip:hover{transform:translateY(-1px)}
+/* table */
+.tablewrap{background:var(--card); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); overflow:auto; max-height:none}
+table.cmp{border-collapse:separate; border-spacing:0; width:100%; min-width:720px}
+table.cmp th, table.cmp td{padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); font-size:14.5px}
+table.cmp thead th{position:sticky; top:0; background:var(--card); z-index:2; font-family:"Fraunces"; font-weight:500; font-size:22px; border-bottom:2px solid var(--line)}
+table.cmp thead th .g{display:block; font-family:"Figtree"; font-size:12px; color:var(--ink3); font-weight:500; margin-top:2px}
+table.cmp thead th.t{border-top:5px solid var(--c)}
+table.cmp th.rowh{position:sticky; left:0; background:var(--card); z-index:1; width:170px; min-width:150px; font-size:13px; font-weight:700; color:var(--ink2); text-transform:uppercase; letter-spacing:.05em}
+table.cmp thead th.rowh{z-index:3}
+table.cmp tr.grp th{background:var(--paper2); font-family:"Figtree"; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink3); font-weight:700; padding:9px 16px; position:sticky; left:0}
+table.cmp td.hl{background:color-mix(in srgb, var(--soft) 55%, white)}
+table.cmp tbody tr:hover td{background:#FBF6EF}
+.dots{display:inline-flex; gap:3px; vertical-align:middle; margin-right:6px}
+.dots i{width:9px; height:9px; border-radius:50%; background:var(--line)}
+.dots i.on{background:var(--c)}
+.hide{display:none !important}
+.scrollhint{display:none; font-size:12.5px; color:var(--ink3); margin:8px 2px 0}
+/* deep dive tabs */
+.tabs{display:flex; gap:8px; margin:24px 0 0; flex-wrap:wrap}
+.tab{appearance:none; border:0; background:transparent; font:500 22px "Fraunces"; color:var(--ink3); padding:8px 4px; margin-right:18px; border-bottom:3px solid transparent; cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ink); border-color:var(--c)}
+.panel{display:none; margin-top:22px; animation:rise .45s ease forwards}
+.panel.on{display:block}
+.pgrid{display:grid; grid-template-columns:1.2fr 1fr; gap:16px}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:22px; box-shadow:var(--shadow)}
+.card h3{font-size:22px; margin-bottom:10px}
+.card h4{font-family:"Figtree"; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink3); font-weight:700; margin:18px 0 8px}
+.card ul{margin:0; padding-left:18px} .card li{margin:5px 0}
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:6px 0 4px}
+.stat{background:var(--soft); border-radius:14px; padding:14px}
+.stat .n{font-family:"Fraunces"; font-size:34px; line-height:1; color:var(--c)}
+.stat .l{font-size:12.5px; color:var(--ink2); margin-top:6px; line-height:1.35}
+.risk{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.risk div{border-radius:12px; padding:12px 14px; font-size:14px}
+.risk .r1{background:#F3EEE6} .risk .r2{background:var(--caution-soft)} .risk .r3{background:var(--avoid-soft)}
+.risk b{display:block; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:4px; color:var(--ink2)}
+.schedule{display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin:6px 0}
+.schedule span{font-size:12.5px; font-weight:600; background:var(--paper2); border-radius:8px; padding:6px 9px}
+.schedule span.s{background:var(--c); color:#fff}
+.note{font-size:13.5px; color:var(--ink2); background:var(--paper2); border-radius:12px; padding:12px 14px; margin-top:14px}
+/* timeline */
+.tl{display:grid; grid-template-columns:280px 1fr; gap:16px; margin-top:24px}
+.ctrl label{display:block; font-size:13px; font-weight:700; color:var(--ink2); margin:14px 0 6px}
+.ctrl label:first-child{margin-top:0}
+input[type=range]{width:100%; accent-color:var(--ink)}
+.val{font-family:"Fraunces"; font-size:20px}
+svg text{font-family:"Figtree"}
+/* calculator */
+.calc{display:grid; grid-template-columns:1fr 1.1fr; gap:16px; margin-top:24px}
+.area{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px dashed var(--line)}
+.area:last-child{border-bottom:0}
+.area .nm{font-weight:600}
+.area .sub{font-size:12.5px; color:var(--ink3)}
+.step{display:inline-flex; align-items:center; border:1.5px solid var(--line); border-radius:99px; overflow:hidden; background:#fff}
+.step button{appearance:none; border:0; background:none; width:32px; height:32px; font-size:18px; cursor:pointer; color:var(--ink2)}
+.step output{min-width:36px; text-align:center; font-weight:700; font-size:14px}
+.tog{display:flex; align-items:center; gap:10px}
+.tog input{width:18px; height:18px; accent-color:var(--ink)}
+.res{display:grid; gap:12px}
+.rcard{border-radius:var(--r); padding:18px 20px; background:var(--card); border:1px solid var(--line); border-left:6px solid var(--c); box-shadow:var(--shadow)}
+.rcard .top{display:flex; justify-content:space-between; align-items:baseline; gap:10px}
+.rcard .nm{font-family:"Fraunces"; font-size:22px}
+.rcard .big{font-family:"Fraunces"; font-size:34px; color:var(--c)}
+.rcard .rows{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:10px}
+.rcard .rows div{font-size:12.5px; color:var(--ink3)}
+.rcard .rows b{display:block; font-size:16px; color:var(--ink)}
+/* meds */
+.meds{display:flex; flex-wrap:wrap; gap:8px; margin:20px 0}
+.med{appearance:none; border:1.5px solid var(--line); background:var(--card); border-radius:12px; padding:9px 13px; font:500 14px "Figtree"; color:var(--ink2); cursor:pointer; text-align:left}
+.med[aria-pressed="true"]{border-color:var(--ink); background:var(--ink); color:#F6F0E8}
+.medout{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.mcol{background:var(--card); border:1px solid var(--line); border-top:5px solid var(--c); border-radius:var(--r); padding:18px}
+.mcol h3{font-size:22px; margin-bottom:10px}
+.mitem{border-radius:12px; padding:10px 12px; margin:8px 0; font-size:14px}
+.mitem .lv{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; display:block; margin-bottom:2px}
+.mitem.ok{background:var(--ok-soft)} .mitem.ok .lv{color:var(--ok)}
+.mitem.caution{background:var(--caution-soft)} .mitem.caution .lv{color:var(--caution)}
+.mitem.avoid{background:var(--avoid-soft)} .mitem.avoid .lv{color:var(--avoid)}
+.empty{color:var(--ink3); font-size:14px; padding:10px 0}
+.legend{display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--ink2); margin-bottom:14px}
+.legend span::before{content:""; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; background:var(--k)}
+/* 40s */
+.forty{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:24px}
+.forty .card h3{font-size:20px}
+/* questions */
+.qs{list-style:none; padding:0; margin:22px 0 0; columns:2; column-gap:24px}
+.qs li{break-inside:avoid; margin-bottom:10px}
+.qs label{display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px 14px; cursor:pointer; font-size:15px}
+.qs input{margin-top:3px; width:18px; height:18px; accent-color:var(--botox); flex:none}
+.qs input:checked + span{color:var(--ink3); text-decoration:line-through}
+/* sources */
+.src{columns:2; column-gap:28px; font-size:14px; padding-left:18px}
+.src li{margin-bottom:8px; break-inside:avoid}
+.src a{color:var(--ink2)}
+footer{padding:40px 0 60px; border-top:1px solid var(--line); font-size:13.5px; color:var(--ink3)}
+.disc{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:18px 20px; font-size:14px; color:var(--ink2); margin-top:20px}
+.btn{appearance:none; border:0; background:var(--ink); color:#F6F0E8; border-radius:99px; padding:10px 16px; font:600 14px "Figtree"; cursor:pointer}
+@media (max-width:900px){
+  .trio,.idea,.pgrid,.tl,.calc,.medout,.forty{grid-template-columns:1fr}
+  .qs,.src{columns:1}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .scrollhint{display:block}
+}
+@media (max-width:560px){
+  section{padding:48px 0}
+  .stats{grid-template-columns:1fr 1fr 1fr; gap:6px} .stat{padding:10px} .stat .n{font-size:24px}
+  .risk{grid-template-columns:1fr}
+  table.cmp th.rowh{width:118px; min-width:118px; font-size:11.5px; padding:12px 10px}
+  table.cmp td{font-size:13.5px; padding:12px 12px; min-width:200px}
+  .tab{font-size:19px; margin-right:10px}
+  .callout{flex-direction:column; gap:6px}
+  .rcard .rows{grid-template-columns:1fr 1fr 1fr}
+  nav.top .brand{font-size:17px}
+}
+@media print{nav.top,.chips,.ctrl,.meds{display:none} body::before{display:none} .panel{display:block !important}}
+</style>
+</head>
+<body>
+<nav class="top"><div class="wrap">
+  <a class="brand" href="#top">Smoother, <i>explained</i></a>
+  <div class="links">
+    <a href="#chart">Chart</a><a href="#details">Details</a><a href="#results">Results</a><a href="#cost">Cost</a><a href="#meds">Meds check</a><a href="#forties">In your 40s</a><a href="#questions">Questions</a><a href="#sources">Sources</a>
+  </div>
+</div></nav>
+
+<header class="hero wrap" id="top">
+  <div class="blob" style="width:420px;height:420px;background:#F1C4CE;right:-120px;top:-80px"></div>
+  <div class="blob" style="width:300px;height:300px;background:#CFE5E1;right:180px;top:160px"></div>
+  <div class="eyebrow">A plain-English guide for women in their 40s</div>
+  <h1 style="margin-top:14px">Smoother,<br><i>explained.</i></h1>
+  <p class="sub">An honest side-by-side of <b>Botox</b>, <b>Xeomin</b>, and <b>PRP/PRF</b>: what each one actually does, how well it works, what it costs over time, and what to check with your provider before you book.</p>
+  <div class="trio">
+    <div class="tcard c-botox"><div class="name">Botox</div><div class="gen">onabotulinumtoxinA · neurotoxin</div><p>The original. Relaxes the muscles that crease your skin when you frown, raise your brows, or smile.</p><div class="tags"><span class="tag">Fast</span><span class="tag">Strongest evidence</span><span class="tag">3–4 months</span></div></div>
+    <div class="tcard c-xeomin"><div class="name">Xeomin</div><div class="gen">incobotulinumtoxinA · neurotoxin</div><p>Botox's "naked" cousin. Same job, same dosing, but purified without the extra proteins. Often a bit cheaper.</p><div class="tags"><span class="tag">Fast</span><span class="tag">Matched Botox in trials</span><span class="tag">3–4 months</span></div></div>
+    <div class="tcard c-prp"><div class="name">PRP / PRF</div><div class="gen">your own platelets · regenerative</div><p>Concentrated growth factors from your own blood, injected or microneedled in to nudge collagen. Works on texture, not muscles.</p><div class="tags"><span class="tag">Gradual</span><span class="tag">Evidence still emerging</span><span class="tag">Series of 3</span></div></div>
+  </div>
+</header>
+
+<section class="wrap" id="idea">
+  <div class="eyebrow">Start here</div>
+  <h2>There are two kinds of wrinkles</h2>
+  <p class="lede">This is the single most useful thing to know before choosing. These treatments are not really competitors. They fix <em class="f">different</em> problems, which is why many women in their 40s end up using a toxin and a collagen treatment together.</p>
+  <div class="idea">
+    <div class="box">
+      <div class="eyebrow">Type 1</div>
+      <h3>Expression lines</h3>
+      <svg class="line-demo" viewBox="0 0 300 46" aria-hidden="true"><path d="M10 23 Q40 4 70 23 T130 23 T190 23 T250 23 T290 23" fill="none" stroke="#B2475D" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <p class="muted">Frown "11s," forehead lines, crow's feet. They appear (or deepen) when you move your face. Caused by repeated muscle contraction.</p>
+      <div class="fix" style="color:var(--botox)">Best fix: Botox or Xeomin (relax the muscle)</div>
+    </div>
+    <div class="box">
+      <div class="eyebrow">Type 2</div>
+      <h3>Etched lines &amp; crepiness</h3>
+      <svg class="line-demo" viewBox="0 0 300 46" aria-hidden="true"><path d="M10 30 L40 26 L60 31 L85 24 L110 29 L140 25 L170 30 L200 24 L230 28 L260 25 L290 29" fill="none" stroke="#B9592A" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 5"/></svg>
+      <p class="muted">Fine lines that stay even when your face is still, thinning skin, rough texture, under-eye crepiness. Caused mostly by collagen loss and sun.</p>
+      <div class="fix" style="color:var(--prp)">Possible fix: PRP/PRF (collagen support), plus retinoids, lasers, or filler</div>
+    </div>
+  </div>
+  <div class="callout">
+    <div class="num">30%</div>
+    <div>According to the American Academy of Dermatology, women's skin loses <b>about 30% of its collagen during the first five years of menopause.</b> That's why many women notice "etched" lines and texture changes picking up in their mid-to-late 40s, even with a great skincare routine.</div>
+  </div>
+</section>
+
+<section class="wrap" id="chart">
+  <div class="eyebrow">At a glance</div>
+  <h2>The comparison chart</h2>
+  <p class="lede">Tap a treatment to show or hide its column. Tap a row label to highlight that row.</p>
+  <div class="chips" id="colChips">
+    <button class="chip c-botox" data-col="botox" aria-pressed="true"><span class="dot"></span>Botox</button>
+    <button class="chip c-xeomin" data-col="xeomin" aria-pressed="true"><span class="dot"></span>Xeomin</button>
+    <button class="chip c-prp" data-col="prp" aria-pressed="true"><span class="dot"></span>PRP / PRF</button>
+  </div>
+  <div class="tablewrap"><table class="cmp" id="cmp"></table></div>
+  <div class="scrollhint">← Swipe sideways to see every column →</div>
+  <p class="small muted" style="margin-top:12px">Costs are typical U.S. and Dallas–Fort Worth ranges for late 2026; your provider's pricing may differ. Success rates come from the studies listed in Sources.</p>
+</section>
+
+<section class="wrap" id="details">
+  <div class="eyebrow">Deep dive</div>
+  <h2>Everything about each option</h2>
+  <div class="tabs" role="tablist">
+    <button class="tab c-botox" role="tab" aria-selected="true" data-tab="botox">Botox</button>
+    <button class="tab c-xeomin" role="tab" aria-selected="false" data-tab="xeomin">Xeomin</button>
+    <button class="tab c-prp" role="tab" aria-selected="false" data-tab="prp">PRP / PRF</button>
+  </div>
+
+  <!-- BOTOX -->
+  <div class="panel on c-botox" id="p-botox">
+    <div class="pgrid">
+      <div class="card">
+        <h3>How it works</h3>
+        <p>A purified protein that temporarily blocks the nerve signal telling specific muscles to contract. The skin over those muscles stops folding, so lines soften and new ones are less likely to etch in. FDA-approved for cosmetic use since 2002 for frown lines, now also for forehead lines, crow's feet, and neck (platysma) bands.</p>
+        <h4>Success rate</h4>
+        <div class="stats">
+          <div class="stat"><div class="n">80–89%</div><div class="l">had meaningful frown-line improvement at day 30 (vs 3–7% with placebo)</div></div>
+          <div class="stat"><div class="n">~4 mo</div><div class="l">median time results last (119–148 days in crow's feet trials)</div></div>
+          <div class="stat"><div class="n">1</div><div class="l">session to see results; full effect at about 2 weeks</div></div>
+        </div>
+        <h4>Benefits</h4>
+        <ul>
+          <li>Most-studied cosmetic injectable in the world, with 20+ years of data.</li>
+          <li>Quick: about 10–15 minutes, little to no downtime.</li>
+          <li>Predictable, visible results on expression lines.</li>
+          <li>Regular use can help prevent lines from deepening over time. A long-term study of repeated upper-face treatments found effectiveness and safety stayed consistently high.</li>
+          <li>Approved for the most face and neck areas of any toxin.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Treatments &amp; maintenance</h3>
+        <div class="schedule"><span class="s">Visit 1</span><span>2-wk touch-up (if needed)</span><span class="s">~4 mo</span><span class="s">~8 mo</span><span class="s">~12 mo</span></div>
+        <p class="small muted">Typically 3–4 visits per year. Labels say no more often than every 3 months. Some long-term users find they can stretch visits a bit further over time.</p>
+        <h4>Health risks</h4>
+        <div class="risk">
+          <div class="r1"><b>Common</b>Pinpoint bruising, tenderness, mild headache for a day or two.</div>
+          <div class="r2"><b>Uncommon</b>Droopy eyelid (about 3% in frown-line trials), heavy or uneven brows. Temporary, usually weeks.</div>
+          <div class="r3"><b>Rare</b>Allergic reaction. FDA boxed warning for toxin spreading beyond the injection site (trouble swallowing, breathing, vision). Not confirmed at cosmetic doses, but seek care right away if it happens.</div>
+        </div>
+        <h4>Who should not get it (or should check first)</h4>
+        <ul>
+          <li>Pregnant or breastfeeding (not enough safety data; most providers wait).</li>
+          <li>Allergy to any botulinum toxin or its ingredients (contains human albumin).</li>
+          <li>Infection or active breakout at the injection site.</li>
+          <li>Neuromuscular conditions: myasthenia gravis, Lambert-Eaton, ALS.</li>
+          <li>Trouble swallowing or breathing, or prior eyelid surgery or weak eyelids.</li>
+        </ul>
+        <h4>Cost</h4>
+        <p><b>$10–$16 per unit</b> in DFW ($10–$20 nationally). Frown lines alone: about 20 units ($200–$320). Full upper face (frown + forehead + crow's feet): about 40–64 units, roughly <b>$400–$1,000 per visit</b>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- XEOMIN -->
+  <div class="panel c-xeomin" id="p-xeomin">
+    <div class="pgrid">
+      <div class="card">
+        <h3>How it works</h3>
+        <p>The same active ingredient type as Botox (botulinum toxin type A), made by Merz. The difference: Xeomin is purified to remove the "complexing proteins" that surround the toxin in Botox. That's why it's nicknamed the "naked" toxin. It's dosed roughly 1:1 with Botox. FDA-approved for frown lines (2011) and, since July 2024, for treating forehead lines, frown lines, and crow's feet together.</p>
+        <h4>Success rate</h4>
+        <div class="stats">
+          <div class="stat"><div class="n">93–96%</div><div class="l">responders at peak (month 1) in phase 3 and head-to-head trials</div></div>
+          <div class="stat"><div class="n">80%</div><div class="l">still responding at month 3 (Botox: 80.7% in the same trial)</div></div>
+          <div class="stat"><div class="n">46–62%</div><div class="l">still responding at month 4, depending on the study</div></div>
+        </div>
+        <h4>Benefits</h4>
+        <ul>
+          <li>Matched Botox for results and duration in head-to-head studies (month 1: 95.7% vs 99.2%; month 4: 62.1% vs 67.2%).</li>
+          <li>No complexing proteins, which may lower the theoretical risk of developing antibodies that make toxins stop working. This is debated, and resistance is rare with any brand at cosmetic doses.</li>
+          <li>Often priced $1–$3 less per unit than Botox.</li>
+          <li>Doesn't need refrigeration before mixing, which makes storage simpler for the clinic.</li>
+          <li>A good option to try if Botox seems to be wearing off faster than it used to.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Treatments &amp; maintenance</h3>
+        <div class="schedule"><span class="s">Visit 1</span><span>2-wk touch-up (if needed)</span><span class="s">~3–4 mo</span><span class="s">~7–8 mo</span><span class="s">~11–12 mo</span></div>
+        <p class="small muted">Same rhythm as Botox: 3–4 visits a year, no more often than every 12 weeks per the label. Some people notice it kicks in a day or two slower, but studies show comparable onset.</p>
+        <h4>Health risks</h4>
+        <div class="risk">
+          <div class="r1"><b>Common</b>Injection-site bruising (about 2% in upper-face trials), headache, tenderness.</div>
+          <div class="r2"><b>Uncommon</b>Droopy eyelid or brow, asymmetry, dry eyes. Temporary.</div>
+          <div class="r3"><b>Rare</b>Allergic reaction. Same FDA boxed warning as all toxins for distant spread of effect.</div>
+        </div>
+        <h4>Who should not get it (or should check first)</h4>
+        <ul>
+          <li>Pregnant or breastfeeding.</li>
+          <li>Allergy to any botulinum toxin or its ingredients (contains human albumin and sucrose).</li>
+          <li>Infection at the injection site.</li>
+          <li>Neuromuscular conditions such as myasthenia gravis or Lambert-Eaton syndrome.</li>
+          <li>Swallowing or breathing problems.</li>
+        </ul>
+        <h4>Cost</h4>
+        <p><b>$8–$18 per unit</b> nationally, commonly <b>$10–$13</b>. Frown lines: about 20 units ($200–$300). Full upper face: roughly <b>$400–$850 per visit</b>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRP -->
+  <div class="panel c-prp" id="p-prp">
+    <div class="pgrid">
+      <div class="card">
+        <h3>How it works</h3>
+        <p>A small tube of your blood is drawn and spun in a centrifuge to concentrate the platelets, which carry growth factors. The concentrate is injected into the skin or applied during microneedling (the "vampire facial") to encourage collagen and improve texture.</p>
+        <p><b>PRP vs PRF:</b> PRF (platelet-rich fibrin) is a newer version spun more slowly without anticoagulant. It forms a soft gel that may release growth factors over a longer period. Reviews so far show neither one is clearly better. For this guide, "PFP" is treated as PRF; ask your provider exactly what their version is.</p>
+        <h4>Success rate</h4>
+        <div class="stats">
+          <div class="stat"><div class="n">1.34×</div><div class="l">more likely to report satisfaction vs control (2025 meta-analysis, 9 trials, 358 patients)</div></div>
+          <div class="stat"><div class="n">1.42×</div><div class="l">more likely to show measurable improvement vs control (same analysis)</div></div>
+          <div class="stat"><div class="n">3+</div><div class="l">sessions: most people who get results needed at least three (AAD)</div></div>
+        </div>
+        <div class="note"><b>The honest picture:</b> In a U.S. randomized trial where participants averaged age 46 (mostly women), blinded dermatologists saw <b>no measurable difference in fine lines</b> after one PRP session. But participants themselves rated their skin's <b>texture and wrinkles as improved at 6 months</b>. Studies are small and use different methods, so results are less predictable than with toxins.</div>
+        <h4>Benefits</h4>
+        <ul>
+          <li>Uses your own blood, so no foreign substance and essentially no allergy risk.</li>
+          <li>Targets texture, fine "crepey" lines, glow, and under-eye skin, which toxins don't address.</li>
+          <li>Pairs well with a toxin: muscles relaxed by Botox/Xeomin plus skin quality from PRP.</li>
+          <li>Results build gradually and look natural.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Treatments &amp; maintenance</h3>
+        <div class="schedule"><span class="s">Session 1</span><span>4–6 wks</span><span class="s">Session 2</span><span>4–6 wks</span><span class="s">Session 3</span><span>then</span><span class="s">1–2× / year</span></div>
+        <p class="small muted">Improvement builds over 2–3 months after the series. A review of under-eye studies found PRF gains often faded by about 6 months, which is why maintenance matters.</p>
+        <h4>Health risks</h4>
+        <div class="risk">
+          <div class="r1"><b>Common</b>Redness, swelling, and bruising for 1–3 days (with microneedling, a sunburn-like look). Soreness at the blood draw.</div>
+          <div class="r2"><b>Uncommon</b>Lightheadedness during the draw, small bumps, temporary dark spots (more likely on deeper skin tones after microneedling).</div>
+          <div class="r3"><b>Rare</b>Infection, or risk from improper blood handling, which the AAD calls the biggest risk. Choose a medical practice with sterile, single-use kits.</div>
+        </div>
+        <h4>Who should not get it (or should check first)</h4>
+        <ul>
+          <li>Blood or platelet disorders, low platelet count, or anemia.</li>
+          <li>On blood thinners for heart disease (AAD says not recommended).</li>
+          <li>Any blood cancer, active cancer or chemo, or skin cancer in the treated area.</li>
+          <li>Hepatitis C, HIV, active infection, fever, or an active cold sore or acne flare in the area.</li>
+          <li>Pregnancy or breastfeeding (most providers wait). History of keloid scarring, if microneedling.</li>
+        </ul>
+        <h4>Cost</h4>
+        <p><b>$500–$1,500 per session</b> (AAD range: $250–$1,500). PRF and face + neck sessions trend higher. A series of 3 is typically <b>$1,500–$3,600</b>, often with a package discount. Not FDA-approved specifically for wrinkles (the devices are cleared, the facial use is off-label), and insurance doesn't cover it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="results">
+  <div class="eyebrow">How results play out</div>
+  <h2>A year of results, side by side</h2>
+  <p class="lede">Toxins act fast and strong on expression lines, then wear off. PRP/PRF builds slowly and gently on texture. Move the sliders to see how the timing changes.</p>
+  <div class="tl">
+    <div class="card ctrl">
+      <label>Toxin visit every <span class="val" id="ivOut">4</span> months</label>
+      <input type="range" id="iv" min="3" max="6" step="0.5" value="4">
+      <label>PRP/PRF maintenance sessions per year after the series</label>
+      <input type="range" id="mt" min="0" max="2" step="1" value="1">
+      <div class="val" id="mtOut" style="font-size:16px">1 session</div>
+      <label>Show</label>
+      <div class="chips" style="margin:0" id="lineChips">
+        <button class="chip c-botox" data-line="tox" aria-pressed="true"><span class="dot"></span>Botox / Xeomin</button>
+        <button class="chip c-prp" data-line="prp" aria-pressed="true"><span class="dot"></span>PRP / PRF</button>
+      </div>
+      <p class="small muted" style="margin-top:14px">Illustration based on typical study timing (toxins: full effect ~2 weeks, median ~4 months; PRP: 3 sessions, builds over months, fades by ~6–12 months). Not a prediction for any one person.</p>
+    </div>
+    <div class="card" style="padding:14px 10px 6px"><svg id="tlsvg" viewBox="0 0 720 340" width="100%" role="img" aria-label="Illustrative chart of results over 12 months"></svg></div>
+  </div>
+</section>
+
+<section class="wrap" id="cost">
+  <div class="eyebrow">Budget it</div>
+  <h2>Cost calculator</h2>
+  <p class="lede">Adjust the areas and prices to match a quote. Unit numbers default to FDA-label doses; your injector may use more or fewer based on your muscles and goals.</p>
+  <div class="calc">
+    <div class="card">
+      <h3>Toxin areas</h3>
+      <div class="area"><div><div class="nm">Frown lines ("11s")</div><div class="sub">Label dose 20 units</div></div><div class="tog"><div class="step" data-k="frown"><button aria-label="less">−</button><output>20</output><button aria-label="more">+</button></div><input type="checkbox" data-a="frown" checked aria-label="include frown lines"></div></div>
+      <div class="area"><div><div class="nm">Forehead lines</div><div class="sub">Label dose 20 units · many use 8–16</div></div><div class="tog"><div class="step" data-k="forehead"><button aria-label="less">−</button><output>20</output><button aria-label="more">+</button></div><input type="checkbox" data-a="forehead" checked aria-label="include forehead"></div></div>
+      <div class="area"><div><div class="nm">Crow's feet</div><div class="sub">Label dose 24 units (both sides)</div></div><div class="tog"><div class="step" data-k="crows"><button aria-label="less">−</button><output>24</output><button aria-label="more">+</button></div><input type="checkbox" data-a="crows" checked aria-label="include crow's feet"></div></div>
+      <label class="small" style="display:block;font-weight:700;color:var(--ink2);margin:16px 0 4px">Botox price per unit: <span class="val" id="bpOut">$13</span></label>
+      <input type="range" id="bp" min="9" max="20" step="0.5" value="13">
+      <label class="small" style="display:block;font-weight:700;color:var(--ink2);margin:12px 0 4px">Xeomin price per unit: <span class="val" id="xpOut">$11</span></label>
+      <input type="range" id="xp" min="7" max="18" step="0.5" value="11">
+      <label class="small" style="display:block;font-weight:700;color:var(--ink2);margin:12px 0 4px">Toxin visits per year: <span class="val" id="vyOut">3</span></label>
+      <input type="range" id="vy" min="2" max="4" step="1" value="3">
+      <h3 style="margin-top:24px">PRP / PRF</h3>
+      <label class="small" style="display:block;font-weight:700;color:var(--ink2);margin:4px 0 4px">Price per session: <span class="val" id="ppOut">$750</span></label>
+      <input type="range" id="pp" min="300" max="1500" step="25" value="750">
+      <label class="small" style="display:block;font-weight:700;color:var(--ink2);margin:12px 0 4px">Starter series: <span class="val" id="psOut">3</span> sessions</label>
+      <input type="range" id="ps" min="1" max="4" step="1" value="3">
+      <label class="small" style="display:block;font-weight:700;color:var(--ink2);margin:12px 0 4px">Maintenance per year after: <span class="val" id="pmOut">1</span></label>
+      <input type="range" id="pm" min="0" max="3" step="1" value="1">
+    </div>
+    <div class="res" id="res"></div>
+  </div>
+</section>
+
+<section class="wrap" id="meds">
+  <div class="eyebrow">Before you book</div>
+  <h2>Vitamins, supplements &amp; meds check</h2>
+  <p class="lede">Tap anything you take regularly. You'll see what to discuss for each treatment. <b>Never stop a prescribed medication without talking to the doctor who prescribed it.</b> Most of these are about bruising, not danger, but your injector needs the full list.</p>
+  <div class="meds" id="medBtns"></div>
+  <div class="legend"><span style="--k:var(--avoid)">Avoid / doctor sign-off needed</span><span style="--k:var(--caution)">Caution: usually pause or plan around</span><span style="--k:var(--ok)">Generally fine</span></div>
+  <div class="medout" id="medOut"></div>
+  <div style="margin-top:14px"><button class="btn" id="medAll">Show everything</button> <button class="btn" id="medNone" style="background:var(--paper2);color:var(--ink)">Clear</button></div>
+</section>
+
+<section class="wrap" id="forties">
+  <div class="eyebrow">Specific to this decade</div>
+  <h2>Things that matter in your 40s</h2>
+  <div class="forty">
+    <div class="card"><h3>Perimenopause changes the game</h3><p class="muted">Collagen loss speeds up as estrogen declines, so lines shift from mostly "expression" to a mix with "etched" lines and thinner skin. That's when a toxin alone may feel less complete, and adding a collagen treatment (PRP/PRF, prescription retinoid, laser, or microneedling) makes sense.</p></div>
+    <div class="card"><h3>Natural-looking dosing</h3><p class="muted">Women in their 40s often prefer softening over freezing. Ask for a conservative first round with a 2-week check. It's easy to add a few units; you can't take them away. Over-treating the forehead in particular can make brows feel heavy.</p></div>
+    <div class="card"><h3>Pregnancy planning</h3><p class="muted">If pregnancy is possible, mention it. Toxins and PRP are generally deferred during pregnancy and breastfeeding because there isn't enough safety data.</p></div>
+    <div class="card"><h3>Weight-loss medications (GLP-1s)</h3><p class="muted">There's no known direct interaction between semaglutide or tirzepatide and these treatments. But faster weight loss can reduce facial volume, which toxins don't fix and PRP only modestly helps. That's usually a filler or collagen-stimulator conversation.</p></div>
+    <div class="card"><h3>The foundation still matters most</h3><p class="muted">Daily SPF 30+ and a retinoid (over-the-counter retinol or prescription tretinoin) are the best-proven long-term wrinkle prevention. Injectables work better and last longer on skin that's protected.</p></div>
+    <div class="card"><h3>A common combo plan</h3><p class="muted">Toxin for frown, forehead, and crow's feet 3–4 times a year, plus a PRP/PRF series in a slower season, then 1–2 maintenance sessions a year. Space them out: many providers do toxin and microneedling on different days, or microneedle first.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="questions">
+  <div class="eyebrow">Take this to your consult</div>
+  <h2>Questions to ask your provider</h2>
+  <p class="lede">Tap to check them off. Your progress saves on this device.</p>
+  <ul class="qs" id="qs"></ul>
+</section>
+
+<section class="wrap" id="sources">
+  <div class="eyebrow">Where this comes from</div>
+  <h2>Sources</h2>
+  <ol class="src">
+    <li><a href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/103000s5306lbl.pdf" target="_blank" rel="noopener">BOTOX Cosmetic prescribing information (FDA): day-30 responder rates, adverse reactions, interactions</a></li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5414775/" target="_blank" rel="noopener">Duration of onabotulinumtoxinA effect in crow's feet lines (Dermatologic Surgery, phase 3 data)</a></li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/17241409/" target="_blank" rel="noopener">Repeated botulinum toxin A injections for upper-face lines: long-term safety and effectiveness</a></li>
+    <li><a href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/125360s097lbl.pdf" target="_blank" rel="noopener">XEOMIN prescribing information (FDA): contraindications, warnings, treatment frequency</a></li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/25111351/" target="_blank" rel="noopener">Efficacy of incobotulinumtoxinA for glabellar frown lines (93.1% peak responders; 45.7% at day 120)</a></li>
+    <li><a href="https://www.xeominaesthetic.com/professionals/why-xeomin/clinical-evidence/" target="_blank" rel="noopener">Merz: Xeomin vs Botox head-to-head data (manufacturer source)</a></li>
+    <li><a href="https://www.businesswire.com/news/home/20240723538247/en/Merz-Aesthetics-Announces-FDA-Approval-of-XEOMIN-incobotulinumtoxinA-as-the-First-and-Only-U.S.-Neurotoxin-for-the-Simultaneous-Treatment-of-Upper-Facial-Lines" target="_blank" rel="noopener">FDA approval of Xeomin for simultaneous upper facial lines (July 2024)</a></li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8795657/" target="_blank" rel="noopener">Immunogenicity of botulinum toxin: complexing proteins and antibodies (review)</a></li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/29116410/" target="_blank" rel="noopener">Botulinum toxin therapy in patients on oral anticoagulation</a></li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/22453589/" target="_blank" rel="noopener">Zinc and phytase supplementation and botulinum toxin duration (pilot study, Koshy 2012)</a></li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/41694325/" target="_blank" rel="noopener">Meta-analysis of PRP for skin aging, 9 RCTs, 358 patients (Aesthetic Surgery Journal Open Forum, 2025)</a></li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/30419125/" target="_blank" rel="noopener">PRP for photoaged facial skin: randomized clinical trial (JAMA Dermatology, 2018)</a></li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11035968/" target="_blank" rel="noopener">Use of platelet-rich plasma for skin rejuvenation (systematic review, 2024)</a></li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12587466/" target="_blank" rel="noopener">PRP vs PRF for periorbital rejuvenation (systematic review, 2025)</a></li>
+    <li><a href="https://www.aad.org/public/cosmetic/younger-looking/platelet-rich-plasma-secret-to-younger-skin" target="_blank" rel="noopener">American Academy of Dermatology: PRP for younger-looking skin (sessions, who should avoid, cost)</a></li>
+    <li><a href="https://www.aad.org/public/everyday-care/skin-care-secrets/anti-aging/skin-care-during-menopause" target="_blank" rel="noopener">American Academy of Dermatology: Caring for your skin in menopause</a></li>
+    <li><a href="https://iapam.com/xeomin-vs-botox-vs-dysport" target="_blank" rel="noopener">IAPAM: 2026 per-unit pricing and label doses by product</a></li>
+    <li><a href="https://www.drderderian.com/blog-1-1/how-much-does-botox-cost-in-dallas" target="_blank" rel="noopener">Dallas–Fort Worth Botox pricing overview</a></li>
+  </ol>
+  <div class="disc"><b>Please read:</b> This guide is for education and conversation, not medical advice. It doesn't replace a consultation with a licensed physician, dermatologist, or nurse injector who knows your health history. Bring your full list of medications and supplements to any appointment, and never stop a prescribed medication without your prescriber's guidance. Prices and research summarized as of November 2026.</div>
+</section>
+
+<footer><div class="wrap">Smoother, Explained · Compiled November 2026 · Botox® and Xeomin® are trademarks of their respective owners. This page is independent and not sponsored.</div></footer>
+
+<script>
+(function(){
+const T = {botox:{name:'Botox',gen:'onabotulinumtoxinA'}, xeomin:{name:'Xeomin',gen:'incobotulinumtoxinA'}, prp:{name:'PRP / PRF',gen:'platelet-rich plasma / fibrin'}};
+const dots=(n)=>'<span class="dots">'+[1,2,3,4,5].map(i=>'<i class="'+(i<=n?'on':'')+'"></i>').join('')+'</span>';
+const ROWS = [
+ ['Basics'],
+ ['What it is','Neurotoxin that relaxes targeted facial muscles','Purified neurotoxin, same job as Botox, no complexing proteins','Concentrated platelets from your own blood'],
+ ['Best for','Expression lines: frown, forehead, crow\'s feet','Expression lines: frown, forehead, crow\'s feet','Texture, fine "crepey" lines, glow, under-eyes'],
+ ['Not great for','Lines present at rest from collagen loss, volume loss','Same as Botox','Deep expression lines; won\'t stop muscle movement'],
+ ['FDA status','Approved: frown, forehead, crow\'s feet, neck bands','Approved: frown, forehead, crow\'s feet (together since 2024)','Off-label for wrinkles (devices cleared for other uses)'],
+ ['Procedure','10–15 min, tiny injections','10–15 min, tiny injections','45–90 min incl. blood draw; injections or microneedling'],
+ ['Downtime','None to minimal','None to minimal','1–3 days of redness, swelling'],
+ ['Results'],
+ ['Strength on expression lines',dots(5)+'Strong',dots(5)+'Strong',dots(1)+'Minimal'],
+ ['Strength on texture',dots(1)+'Minimal',dots(1)+'Minimal',dots(3)+'Moderate, variable'],
+ ['Evidence quality',dots(5)+'Very strong: large FDA trials, 20+ yrs',dots(5)+'Very strong: FDA trials, head-to-head vs Botox',dots(2)+'Emerging: small, varied studies'],
+ ['Success rate','80–89% improved at day 30 (placebo 3–7%)','93–96% at month 1; 80% at month 3','Satisfaction 1.34× and measured improvement 1.42× vs control (meta-analysis)'],
+ ['First visible change','2–4 days; full at ~2 weeks','2–4 days; full at ~2 weeks','Gradual, 4–12 weeks after the series'],
+ ['How long it lasts','~3–4 months (median ~4)','~3–4 months','~6–12 months; fades without maintenance'],
+ ['Treatments needed','1 visit (+ optional 2-week touch-up)','1 visit (+ optional 2-week touch-up)','Series of 3, spaced 4–6 weeks'],
+ ['Maintenance','Every 3–4 months (3–4×/yr)','Every 3–4 months (3–4×/yr)','1–2 sessions per year'],
+ ['Cost'],
+ ['Price','$10–$16/unit DFW ($10–$20 U.S.)','$8–$18/unit (commonly $10–$13)','$500–$1,500 per session'],
+ ['Typical visit','Frown only ~$200–$320; full upper face ~$400–$1,000','Frown only ~$200–$300; full upper face ~$400–$850','Series of 3: ~$1,500–$3,600'],
+ ['Approx. yearly','~$1,200–$4,000 (full upper face)','~$1,200–$3,400 (full upper face)','Year 1 ~$1,500–$4,500; then ~$500–$3,000/yr'],
+ ['Safety'],
+ ['Common side effects','Bruising, tenderness, headache','Bruising (~2%), headache','Redness, swelling, bruising, draw-site soreness'],
+ ['Notable risks','Droopy eyelid (~3%), heavy/uneven brow; rare spread of toxin','Droopy eyelid or brow, asymmetry; rare spread of toxin','Infection or blood-handling errors (rare); dark spots after microneedling'],
+ ['Allergy risk','Low; contains human albumin','Low; contains human albumin; fewer foreign proteins','Essentially none (your own blood)'],
+ ['Who should avoid','Pregnant/breastfeeding, neuromuscular disease, site infection, toxin allergy','Pregnant/breastfeeding, neuromuscular disease, site infection, toxin allergy','Blood/platelet disorders, blood thinners, cancer, Hep C/HIV, infection, pregnancy'],
+ ['Key meds to flag','Aminoglycoside antibiotics, anticholinergics, muscle relaxants, blood thinners','Aminoglycoside antibiotics, anticholinergics, muscle relaxants, blood thinners','NSAIDs, blood thinners, steroids, fish oil, vitamin E, isotretinoin'],
+];
+const cols=['botox','xeomin','prp'];
+const tbl=document.getElementById('cmp');
+let h='<thead><tr><th class="rowh"></th>'+cols.map(c=>'<th class="t c-'+c+'" data-c="'+c+'">'+T[c].name+'<span class="g">'+T[c].gen+'</span></th>').join('')+'</tr></thead><tbody>';
+ROWS.forEach(r=>{
+  if(r.length===1){h+='<tr class="grp"><th colspan="4">'+r[0]+'</th></tr>';return;}
+  h+='<tr><th class="rowh" tabindex="0">'+r[0]+'</th>'+cols.map((c,i)=>'<td class="c-'+c+'" data-c="'+c+'">'+r[i+1]+'</td>').join('')+'</tr>';
+});
+tbl.innerHTML=h+'</tbody>';
+tbl.querySelectorAll('th.rowh[tabindex]').forEach(th=>th.addEventListener('click',()=>{th.parentElement.querySelectorAll('td').forEach(td=>td.classList.toggle('hl'));}));
+document.querySelectorAll('#colChips .chip').forEach(b=>b.addEventListener('click',()=>{
+  const on=b.getAttribute('aria-pressed')==='true';
+  const active=[...document.querySelectorAll('#colChips .chip[aria-pressed="true"]')].length;
+  if(on && active===1) return;
+  b.setAttribute('aria-pressed',on?'false':'true');
+  tbl.querySelectorAll('[data-c="'+b.dataset.col+'"]').forEach(el=>el.classList.toggle('hide',on));
+  const n=document.querySelectorAll('#colChips .chip[aria-pressed="true"]').length;
+  tbl.style.minWidth=n===1?'0':''; tbl.querySelectorAll('tr.grp th').forEach(th=>th.colSpan=n+1);
+}));
+
+// tabs
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false'));
+  t.setAttribute('aria-selected','true');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById('p-'+t.dataset.tab).classList.add('on');
+}));
+
+// timeline
+const svg=document.getElementById('tlsvg'); const W=720,H=340,L=56,R=16,TOP=24,B=48;
+const x=m=>L+(W-L-R)*m/12, y=v=>TOP+(H-TOP-B)*(1-v);
+const show={tox:true,prp:true};
+function toxAt(t,iv){let best=0;for(let s=0;s<=12;s+=iv){const d=t-s;if(d<0)continue;let e;if(d<.5)e=d/.5;else if(d<2.6)e=1;else e=Math.max(0,1-(d-2.6)/2.4);best=Math.max(best,e*.95);}return best;}
+function prpAt(t,mt){const sessions=[0,1.25,2.5];if(mt>=1)sessions.push(mt===1?9:7);if(mt>=2)sessions.push(11);let v=0;
+  // build: each session contributes a slow-rising, slow-fading bump
+  sessions.forEach((s,i)=>{const d=t-s;if(d<0)return;const amp=i<3?.17:.14;const rise=Math.min(1,d/2.2);const fade=d>4?Math.exp(-(d-4)/5):1;v+=amp*rise*fade;});
+  return Math.min(.6,v);}
+function draw(){
+  const iv=+document.getElementById('iv').value, mt=+document.getElementById('mt').value;
+  document.getElementById('ivOut').textContent=iv; document.getElementById('mtOut').textContent=mt===0?'None':mt+(mt===1?' session':' sessions');
+  let s='';
+  for(let i=0;i<=4;i++){const v=i/4;s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="#E3D7C8" stroke-dasharray="'+(i?'3 5':'0')+'"/>';}
+  for(let m=0;m<=12;m+=2){s+='<text x="'+x(m)+'" y="'+(H-B+22)+'" text-anchor="middle" font-size="12" fill="#8A7D74">'+(m===0?'Start':m+' mo')+'</text>';}
+  s+='<text x="14" y="'+(TOP+(H-TOP-B)/2)+'" transform="rotate(-90 14 '+(TOP+(H-TOP-B)/2)+')" text-anchor="middle" font-size="12" fill="#8A7D74">Visible change (illustrative)</text>';
+  s+='<text x="'+(L-8)+'" y="'+(y(1)+4)+'" text-anchor="end" font-size="11" fill="#8A7D74">High</text><text x="'+(L-8)+'" y="'+(y(0)+4)+'" text-anchor="end" font-size="11" fill="#8A7D74">None</text>';
+  const path=(f,col,fill)=>{let d='',a='';for(let t=0;t<=12.001;t+=.05){const px=x(t),py=y(f(t));d+=(t?'L':'M')+px.toFixed(1)+' '+py.toFixed(1);}a=d+'L'+x(12)+' '+y(0)+'L'+x(0)+' '+y(0)+'Z';return '<path d="'+a+'" fill="'+fill+'"/><path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>';};
+  if(show.prp) s+=path(t=>prpAt(t,mt),'#B9592A','rgba(185,89,42,.10)');
+  if(show.tox) s+=path(t=>toxAt(t,iv),'#B2475D','rgba(178,71,93,.10)');
+  if(show.tox){for(let v=0;v<=12;v+=iv){s+='<circle cx="'+x(v)+'" cy="'+(H-B+4)+'" r="5" fill="#B2475D"/>';}}
+  if(show.prp){const ss=[0,1.25,2.5];if(mt>=1)ss.push(mt===1?9:7);if(mt>=2)ss.push(11);ss.forEach(v=>{s+='<rect x="'+(x(v)-4)+'" y="'+(H-B+10-4)+'" width="8" height="8" transform="rotate(45 '+x(v)+' '+(H-B+10)+')" fill="#B9592A"/>';});}
+  svg.innerHTML=s;
+}
+['iv','mt'].forEach(id=>document.getElementById(id).addEventListener('input',draw));
+document.querySelectorAll('#lineChips .chip').forEach(b=>b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')==='true';b.setAttribute('aria-pressed',on?'false':'true');show[b.dataset.line]=!on;draw();}));
+draw();
+
+// calculator
+const units={frown:20,forehead:20,crows:24}, inc={frown:true,forehead:true,crows:true};
+document.querySelectorAll('.step').forEach(st=>{const k=st.dataset.k,out=st.querySelector('output');const [m,p]=st.querySelectorAll('button');
+  m.onclick=()=>{units[k]=Math.max(2,units[k]-2);out.textContent=units[k];calc();};p.onclick=()=>{units[k]=Math.min(60,units[k]+2);out.textContent=units[k];calc();};});
+document.querySelectorAll('input[data-a]').forEach(c=>c.addEventListener('change',()=>{inc[c.dataset.a]=c.checked;calc();}));
+['bp','xp','vy','pp','ps','pm'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
+const $=n=>'$'+Math.round(n).toLocaleString();
+function calc(){
+  const u=Object.keys(units).reduce((a,k)=>a+(inc[k]?units[k]:0),0);
+  const bp=+bp_.value,xp=+xp_.value,vy=+vy_.value,pp=+pp_.value,ps=+ps_.value,pm=+pm_.value;
+  bpOut.textContent='$'+bp; xpOut.textContent='$'+xp; vyOut.textContent=vy; ppOut.textContent=$(pp); psOut.textContent=ps; pmOut.textContent=pm;
+  const bV=u*bp,xV=u*xp,p1=pp*ps,p2=pp*pm;
+  const card=(c,nm,big,bigl,r)=>'<div class="rcard c-'+c+'"><div class="top"><span class="nm">'+nm+'</span><span><span class="big">'+big+'</span> <span class="small muted">'+bigl+'</span></span></div><div class="rows">'+r.map(x=>'<div><b>'+x[1]+'</b>'+x[0]+'</div>').join('')+'</div></div>';
+  res.innerHTML=
+   card('botox','Botox',$(bV*vy),'per year',[['units per visit',u],['per visit',$(bV)],['5 years',$(bV*vy*5)]])+
+   card('xeomin','Xeomin',$(xV*vy),'per year',[['units per visit',u],['per visit',$(xV)],['5 years',$(xV*vy*5)]])+
+   card('prp','PRP / PRF',$(p1),'first year series',[['maintenance / yr',$(p2)],['year 1 total*',$(p1)],['5 years',$(p1+p2*4)]])+
+   '<div class="note"><b>Combo estimate</b> (Xeomin + PRP/PRF): '+$(xV*vy+p1)+' in year 1, then about '+$(xV*vy+p2)+' per year. <span class="muted">*Assumes maintenance starts in year 2. Many clinics offer package or membership pricing that can lower these numbers.</span></div>';
+}
+const bp_=document.getElementById('bp'),xp_=document.getElementById('xp'),vy_=document.getElementById('vy'),pp_=document.getElementById('pp'),ps_=document.getElementById('ps'),pm_=document.getElementById('pm');
+const bpOut=document.getElementById('bpOut'),xpOut=document.getElementById('xpOut'),vyOut=document.getElementById('vyOut'),ppOut=document.getElementById('ppOut'),psOut=document.getElementById('psOut'),pmOut=document.getElementById('pmOut'),res=document.getElementById('res');
+calc();
+
+// meds checker
+const TOX_SAME=(lv,txt)=>({botox:[lv,txt],xeomin:[lv,txt]});
+const MEDS=[
+ {n:'Fish oil / omega-3',...TOX_SAME('caution','Can increase bruising. Many providers suggest pausing about 7 days before, if your doctor agrees.'),prp:['caution','May reduce platelet function and add bruising. Commonly paused about 1 week before.']},
+ {n:'Vitamin E (high dose)',...TOX_SAME('caution','Thins the blood slightly, so more bruising. Often paused about 7 days before.'),prp:['caution','Often paused about 1 week before for bruising and platelet function.']},
+ {n:'Ginkgo, garlic, ginseng, turmeric/curcumin',...TOX_SAME('caution','Herbal blood-thinning effect can mean more bruising. Often paused about 7 days before.'),prp:['caution','Can affect platelets and bleeding. Usually paused about 1 week before.']},
+ {n:'St. John\'s wort',...TOX_SAME('caution','Linked to bruising risk; mention it.'),prp:['caution','Mention it; may affect bleeding and interacts with many medications.']},
+ {n:'Aspirin, ibuprofen, naproxen (NSAIDs)',...TOX_SAME('caution','More bruising. If skipping is OK with your doctor, avoid 3–7 days before. If aspirin is prescribed for your heart, do not stop it on your own.'),prp:['avoid','They blunt platelet activity and the healing response PRP relies on. Usually avoided about 1 week before and 1–2 weeks after. Acetaminophen (Tylenol) is usually the OK alternative.']},
+ {n:'Prescription blood thinners (warfarin, Eliquis, Xarelto, Plavix)',...TOX_SAME('caution','Higher bruising risk. Research suggests stopping them for toxin injections isn\'t justified, so never stop without your prescriber. Tell your injector.'),prp:['avoid','The AAD lists needing a blood thinner for heart disease as a reason PRP isn\'t recommended. Do not stop the medication; discuss alternatives.']},
+ {n:'Aminoglycoside antibiotics (gentamicin, tobramycin, amikacin, neomycin, streptomycin)',...TOX_SAME('avoid','Listed on the drug label: they can strengthen the toxin\'s effect on muscles. Usually reschedule until the course is finished.'),prp:['ok','No known interaction. Any active infection should be resolved first, though.']},
+ {n:'Anticholinergic meds (some allergy, sleep, and bladder meds like diphenhydramine or oxybutynin)',...TOX_SAME('caution','Label warns they may increase side effects such as dry mouth, blurred vision, or constipation. Mention them.'),prp:['ok','No known interaction.']},
+ {n:'Muscle relaxants',...TOX_SAME('caution','May add to the muscle-weakening effect. Tell your injector.'),prp:['ok','No known interaction.']},
+ {n:'Other botulinum toxin recently (medical Botox for migraine, Dysport, Jeuveau, etc.)',...TOX_SAME('caution','Effects of combining toxins aren\'t well studied. Labels recommend at least 12 weeks between treatments; coordinate timing.'),prp:['ok','No known interaction.']},
+ {n:'Oral or injected steroids (prednisone, cortisone shots)',...TOX_SAME('ok','No major known interaction for cosmetic toxin use. Mention it anyway.'),prp:['caution','Steroids dampen the inflammatory response PRP depends on. Often avoided for 2–3 weeks before.']},
+ {n:'Isotretinoin (Accutane) in the last 6 months',...TOX_SAME('ok','No known interaction.'),prp:['caution','If microneedling is involved, many providers wait about 6 months after finishing because of healing concerns. Plain injection may be OK; ask.']},
+ {n:'Topical retinol / tretinoin / exfoliating acids',...TOX_SAME('ok','Fine. Some skip the night of treatment to avoid irritation.'),prp:['caution','If microneedling, usually paused 3–5 days before and a few days after.']},
+ {n:'Zinc supplement',...TOX_SAME('ok','No harmful interaction known. One small pilot study suggested zinc 50 mg plus phytase for 4 days before treatment might lengthen results, but it\'s unproven and high-dose zinc has its own side effects. Ask before trying.'),prp:['ok','No known interaction.']},
+ {n:'Multivitamin, vitamin C, vitamin D, B12, collagen, biotin',...TOX_SAME('ok','Generally fine to continue.'),prp:['ok','Generally fine to continue. Vitamin C supports normal collagen formation.']},
+ {n:'GLP-1 weight-loss meds (semaglutide, tirzepatide)',...TOX_SAME('ok','No known direct interaction. Facial volume loss from weight loss isn\'t something toxins fix.'),prp:['ok','No known direct interaction. Rapid weight loss changes the face; discuss whether filler or a collagen stimulator also makes sense.']},
+ {n:'Birth control or hormone therapy (HRT)',...TOX_SAME('ok','No known interaction.'),prp:['ok','No known interaction.']},
+ {n:'Alcohol',...TOX_SAME('caution','Avoid for about 24 hours before and after to reduce bruising.'),prp:['caution','Avoid for 24–48 hours before and after; it can increase bruising and swelling.']},
+ {n:'Smoking / nicotine',...TOX_SAME('caution','No direct interaction, but smoking speeds wrinkle formation and slows healing.'),prp:['caution','Reduces blood flow and healing, which can weaken PRP results.']},
+];
+const LV={ok:'Generally fine',caution:'Caution',avoid:'Avoid / doctor sign-off'};
+const sel=new Set();
+const mb=document.getElementById('medBtns');
+MEDS.forEach((m,i)=>{const b=document.createElement('button');b.className='med';b.textContent=m.n;b.setAttribute('aria-pressed','false');b.onclick=()=>{sel.has(i)?sel.delete(i):sel.add(i);b.setAttribute('aria-pressed',sel.has(i));renderMeds();};mb.appendChild(b);});
+function renderMeds(){
+  const out=document.getElementById('medOut');
+  const order={avoid:0,caution:1,ok:2};
+  out.innerHTML=cols.map(c=>{
+    const items=[...sel].map(i=>({n:MEDS[i].n,lv:MEDS[i][c][0],t:MEDS[i][c][1]})).sort((a,b)=>order[a.lv]-order[b.lv]);
+    return '<div class="mcol c-'+c+'"><h3>'+T[c].name+'</h3>'+(items.length?items.map(it=>'<div class="mitem '+it.lv+'"><span class="lv">'+LV[it.lv]+'</span><b>'+it.n+'</b><br>'+it.t+'</div>').join(''):'<div class="empty">Tap items above to see what applies.</div>')+'</div>';
+  }).join('');
+}
+document.getElementById('medAll').onclick=()=>{MEDS.forEach((m,i)=>sel.add(i));mb.querySelectorAll('.med').forEach(b=>b.setAttribute('aria-pressed','true'));renderMeds();};
+document.getElementById('medNone').onclick=()=>{sel.clear();mb.querySelectorAll('.med').forEach(b=>b.setAttribute('aria-pressed','false'));renderMeds();};
+renderMeds();
+
+// questions
+const QS=['What are your credentials, and who will actually do the injecting?','Which toxin do you recommend for me, and why that one?','How many units do you plan to use per area, and what is your price per unit?','Do you offer a free 2-week touch-up?','What would make you NOT recommend treatment for me today?','Here is my full list of meds and supplements. What should I pause, and for how long?','For PRP/PRF: what system do you use, is it a sterile single-use kit, and is it PRP or PRF?','Will PRP be injected, microneedled, or both? How many sessions do you expect I\'ll need?','Can I see before-and-after photos of your own patients in their 40s?','Can we start conservatively for a natural look?','How should I space a toxin visit and a PRP/microneedling session?','What should I do if I notice a droopy eyelid or any trouble swallowing?','Do you offer package or membership pricing?'];
+const qs=document.getElementById('qs'); let saved={}; try{saved=JSON.parse(localStorage.getItem('smoother-qs')||'{}')}catch(e){}
+QS.forEach((q,i)=>{const li=document.createElement('li');li.innerHTML='<label><input type="checkbox" '+(saved[i]?'checked':'')+'><span>'+q+'</span></label>';li.querySelector('input').onchange=e=>{saved[i]=e.target.checked;try{localStorage.setItem('smoother-qs',JSON.stringify(saved))}catch(err){}};qs.appendChild(li);});
+})();
+</script>
+</body>
+</html>
