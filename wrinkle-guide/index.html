@@ -22,7 +22,8 @@
   --r:18px; --shadow:0 1px 0 rgba(33,27,24,.04), 0 10px 30px -18px rgba(33,27,24,.25);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; scroll-padding-top:64px}
+html,body{overflow-x:clip}
 body{margin:0; background:var(--paper); color:var(--ink); font-family:"Figtree",ui-sans-serif,sans-serif; font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased}
 body::before{content:""; position:fixed; inset:0; pointer-events:none; z-index:100; opacity:.35; mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
@@ -30,7 +31,7 @@ h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif; font-weight:500; letter-spacin
 a{color:inherit}
 .wrap{max-width:1160px; margin:0 auto; padding:0 20px}
 .eyebrow{font-size:12px; letter-spacing:.16em; text-transform:uppercase; font-weight:600; color:var(--ink3)}
-section{padding:64px 0; border-top:1px solid var(--line)}
+section.wrap{padding-top:64px; padding-bottom:64px; border-top:1px solid var(--line)}
 section h2{font-size:clamp(30px,5vw,46px); margin:10px 0 12px}
 .lede{color:var(--ink2); max-width:720px; font-size:17px}
 .muted{color:var(--ink3)}
@@ -46,7 +47,7 @@ nav.top .links::-webkit-scrollbar{display:none}
 nav.top .links a{text-decoration:none; font-size:14px; font-weight:500; color:var(--ink2); padding:7px 11px; border-radius:99px; white-space:nowrap}
 nav.top .links a:hover{background:var(--paper2); color:var(--ink)}
 /* hero */
-.hero{padding:56px 0 40px; border-top:0; position:relative; overflow:hidden}
+.hero{padding-top:56px; padding-bottom:40px; position:relative; z-index:0}
 .hero h1{font-size:clamp(48px,10vw,108px); font-weight:400; line-height:.95; letter-spacing:-.035em}
 .hero h1 i{font-weight:300; color:var(--botox)}
 .hero .sub{font-size:clamp(17px,2.2vw,21px); color:var(--ink2); max-width:640px; margin:22px 0 0}
@@ -109,7 +110,7 @@ table.cmp tbody tr:hover td{background:#FBF6EF}
 .stat{background:var(--soft); border-radius:14px; padding:14px}
 .stat .n{font-family:"Fraunces"; font-size:34px; line-height:1; color:var(--c)}
 .stat .l{font-size:12.5px; color:var(--ink2); margin-top:6px; line-height:1.35}
-.risk{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.risk{display:grid; grid-template-columns:1fr; gap:8px}
 .risk div{border-radius:12px; padding:12px 14px; font-size:14px}
 .risk .r1{background:#F3EEE6} .risk .r2{background:var(--caution-soft)} .risk .r3{background:var(--avoid-soft)}
 .risk b{display:block; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:4px; color:var(--ink2)}
@@ -135,7 +136,7 @@ svg text{font-family:"Figtree"}
 .step output{min-width:36px; text-align:center; font-weight:700; font-size:14px}
 .tog{display:flex; align-items:center; gap:10px}
 .tog input{width:18px; height:18px; accent-color:var(--ink)}
-.res{display:grid; gap:12px}
+.res{display:grid; gap:12px; align-content:start}
 .rcard{border-radius:var(--r); padding:18px 20px; background:var(--card); border:1px solid var(--line); border-left:6px solid var(--c); box-shadow:var(--shadow)}
 .rcard .top{display:flex; justify-content:space-between; align-items:baseline; gap:10px}
 .rcard .nm{font-family:"Fraunces"; font-size:22px}
@@ -181,7 +182,7 @@ footer{padding:40px 0 60px; border-top:1px solid var(--line); font-size:13.5px; 
   .scrollhint{display:block}
 }
 @media (max-width:560px){
-  section{padding:48px 0}
+  section.wrap{padding-top:48px; padding-bottom:48px}
   .stats{grid-template-columns:1fr 1fr 1fr; gap:6px} .stat{padding:10px} .stat .n{font-size:24px}
   .risk{grid-template-columns:1fr}
   table.cmp th.rowh{width:118px; min-width:118px; font-size:11.5px; padding:12px 10px}
