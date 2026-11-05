@@ -192,6 +192,19 @@ footer{padding:40px 0 60px; border-top:1px solid var(--line); font-size:13.5px; 
   .rcard .rows{grid-template-columns:1fr 1fr 1fr}
   nav.top .brand{font-size:17px}
 }
+@media (max-width:640px){
+  table.cmp{min-width:0 !important; display:block}
+  table.cmp thead{display:none}
+  table.cmp tbody, table.cmp tr{display:block}
+  table.cmp tr{border-bottom:1px solid var(--line); padding-bottom:10px}
+  table.cmp tr.grp{padding:0; border:0}
+  table.cmp tr.grp th{display:block; position:static}
+  table.cmp th.rowh{position:static; display:block; width:auto; min-width:0; border-bottom:0; padding:16px 16px 6px; font-size:12px}
+  table.cmp td{display:block; min-width:0 !important; border-bottom:0; padding:6px 16px 6px 30px; position:relative; font-size:14.5px}
+  table.cmp td::before{content:attr(data-n); display:block; font-weight:700; font-size:12px; letter-spacing:.04em; color:var(--c)}
+  table.cmp td::after{content:""; position:absolute; left:16px; top:8px; bottom:8px; width:3px; border-radius:2px; background:var(--c)}
+  .scrollhint{display:none !important}
+}
 @media print{nav.top,.chips,.ctrl,.meds{display:none} body::before{display:none} .panel{display:block !important}}
 </style>
 </head>
@@ -547,7 +560,7 @@ const tbl=document.getElementById('cmp');
 let h='<thead><tr><th class="rowh"></th>'+cols.map(c=>'<th class="t c-'+c+'" data-c="'+c+'">'+T[c].name+'<span class="g">'+T[c].gen+'</span></th>').join('')+'</tr></thead><tbody>';
 ROWS.forEach(r=>{
   if(r.length===1){h+='<tr class="grp"><th colspan="4">'+r[0]+'</th></tr>';return;}
-  h+='<tr><th class="rowh" tabindex="0">'+r[0]+'</th>'+cols.map((c,i)=>'<td class="c-'+c+'" data-c="'+c+'">'+r[i+1]+'</td>').join('')+'</tr>';
+  h+='<tr><th class="rowh" tabindex="0">'+r[0]+'</th>'+cols.map((c,i)=>'<td class="c-'+c+'" data-c="'+c+'" data-n="'+T[c].name+'">'+r[i+1]+'</td>').join('')+'</tr>';
 });
 tbl.innerHTML=h+'</tbody>';
 tbl.querySelectorAll('th.rowh[tabindex]').forEach(th=>th.addEventListener('click',()=>{th.parentElement.querySelectorAll('td').forEach(td=>td.classList.toggle('hl'));}));
