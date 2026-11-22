@@ -5,7 +5,7 @@
   "outputDirectory": "dist",
   "ignoreCommand": "git diff --quiet HEAD^ HEAD -- .",
   "functions": {
-    "api/**/*.ts": { "maxDuration": 60 }
+    "api/**/*.ts": { "maxDuration": 90 }
   },
   "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
 }

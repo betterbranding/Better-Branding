@@ -78,7 +78,7 @@ function comparePrompt(body: Body): string {
   return [
     'You help a family furnish their new home in North Richland Hills, Texas (Dallas–Fort Worth) for less money.',
     body.image?.data ? 'The attached photo shows the ORIGINAL furniture piece they like.' : '',
-    body.url ? `The ORIGINAL piece's product page is: ${body.url} — read it for the exact product, size, material, color and price.` : '',
+    body.url ? `The ORIGINAL piece's product page is: ${body.url} — use it (and search) to identify the exact product, size, material, color and price.` : '',
     body.name ? `They describe it as: "${body.name}".` : '',
     body.room ? `It is for the ${body.room}.` : '',
     price ? `The original costs $${price}${body.store ? ` at ${body.store}` : ''}.` : 'Also find the original piece\'s current price.',
@@ -121,15 +121,30 @@ export async function POST(request: Request): Promise<Response> {
   if (body.image?.data) parts.push({ inline_data: { mime_type: body.image.mimeType || 'image/jpeg', data: body.image.data } });
   parts.push({ text: prompt });
 
+  // Search only: reading store pages directly is slow and often blocked, and pushes past the time limit.
   const tools: unknown[] = [{ google_search: {} }];
-  if (body.url) tools.push({ url_context: {} });
 
   const model = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', 'x-goog-api-key': apiKey },
-    body: JSON.stringify({ contents: [{ role: 'user', parts }], tools, generationConfig: { temperature: 0.2 } }),
-  });
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 50000);
+  let res: Response;
+  try {
+    res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+      method: 'POST',
+      signal: ctrl.signal,
+      headers: { 'content-type': 'application/json', 'x-goog-api-key': apiKey },
+      body: JSON.stringify({
+        contents: [{ role: 'user', parts }],
+        tools,
+        // Low thinking keeps searches to seconds instead of a minute or more.
+        generationConfig: { temperature: 0.2, thinkingConfig: { thinkingLevel: 'low' } },
+      }),
+    });
+  } catch {
+    return json({ error: 'The search took too long. Please try again.' }, 504);
+  } finally {
+    clearTimeout(timer);
+  }
   const out = (await res.json().catch(() => ({}))) as any;
   if (!res.ok) {
     console.error('Gemini error', res.status, JSON.stringify(out).slice(0, 500));
