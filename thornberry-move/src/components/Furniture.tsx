@@ -1,4 +1,4 @@
-import { Camera, ExternalLink, ImagePlus, Link2, Plus, Sparkles, TrendingDown } from 'lucide-react';
+import { Camera, ExternalLink, ImagePlus, Link2, Plus, TrendingDown } from 'lucide-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { api, type PriceResult } from '../api';
 import { type Actions, type Furniture as FurnitureRow, FURNITURE_ROOMS, type PriceOffer } from '../types';
@@ -88,7 +88,7 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
   const [draft, setDraft] = useState<Draft | null>(null);
   const [photoUrls, setPhotoUrls] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
-  const [looking, setLooking] = useState<false | 'price' | 'cheaper'>(false);
+  const [looking, setLooking] = useState(false);
   const [aiError, setAiError] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -147,13 +147,13 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
     return blob ? { data: await toBase64(blob), mimeType: blob.type || 'image/jpeg' } : undefined;
   };
 
-  const findCheaper = async () => {
+  // Finds comparable pieces from other stores with live prices. Never changes the item's own link or store.
+  const findComparisons = async () => {
     if (!draft) return;
-    setLooking('cheaper');
+    setLooking(true);
     setAiError(null);
     try {
       const r: PriceResult = await api.findPrice({
-        mode: 'cheaper',
         image: await photoData(draft),
         url: draft.url.trim() || undefined,
         name: draft.name.trim() || undefined,
@@ -162,43 +162,19 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
         store: draft.store.trim() || undefined,
       });
       const patch = { ai_summary: r.summary, offers: r.offers ?? [] };
-      setDraft((d) => d && { ...d, ...patch, price: d.price || (r.price ? String(Math.round(r.price * 100) / 100) : '') });
-      // Saved pieces keep their new options right away, even without tapping Save.
+      setDraft(
+        (d) =>
+          d && {
+            ...d,
+            ...patch,
+            name: d.name.trim() || r.name || d.name,
+            price: d.price || (r.price ? String(Math.round(r.price * 100) / 100) : ''),
+          },
+      );
+      // Saved pieces keep their new comparisons right away, even without tapping Save.
       if (draft.id) actions.update('furniture', draft.id, patch);
     } catch (err) {
       setAiError(err instanceof Error ? err.message : 'Search failed.');
-    } finally {
-      setLooking(false);
-    }
-  };
-
-  const findPrice = async () => {
-    if (!draft) return;
-    setLooking('price');
-    setAiError(null);
-    try {
-      const image = await photoData(draft);
-      const r: PriceResult = await api.findPrice({
-        image,
-        url: draft.url.trim() || undefined,
-        name: draft.name.trim() || undefined,
-        room: draft.room,
-      });
-      setDraft((d) =>
-        d && {
-          ...d,
-          name: d.name.trim() || [r.brand, r.name].filter(Boolean).join(' ') || d.name,
-          price: r.price ? String(Math.round(r.price * 100) / 100) : d.price,
-          price_low: r.price_low,
-          price_high: r.price_high,
-          store: r.store || d.store,
-          url: d.url.trim() || r.product_url || '',
-          ai_summary: r.summary,
-          offers: r.offers ?? [],
-        },
-      );
-    } catch (err) {
-      setAiError(err instanceof Error ? err.message : 'Price lookup failed.');
     } finally {
       setLooking(false);
     }
@@ -270,7 +246,7 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
       />
       {furniture.length === 0 && (
         <div className="tm-empty">
-          Snap a photo or paste a link to start your furniture wishlist. AI will find the price for you.
+          Snap a photo or paste a link to start your furniture wishlist. AI will find comparable pieces and live prices.
         </div>
       )}
       {furniture.length > 0 && sections.length === 0 && <div className="tm-empty">Nothing here yet.</div>}
@@ -385,21 +361,16 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
           {(() => {
             const empty = !draft.photo && !draft.image_path && !draft.url.trim() && !draft.name.trim();
             return (
-              <div className="tm-ai-btns">
-                <button type="button" className="tm-ai-btn" disabled={!!looking || empty} onClick={findPrice}>
-                  {looking === 'price' ? <span className="tm-spinner tm-spinner-sm" /> : <Sparkles size={17} />}
-                  {looking === 'price' ? 'Searching stores…' : 'Find live price'}
-                </button>
-                <button type="button" className="tm-ai-btn tm-ai-btn-solid" disabled={!!looking || empty} onClick={findCheaper}>
-                  {looking === 'cheaper' ? <span className="tm-spinner tm-spinner-sm" /> : <TrendingDown size={17} />}
-                  {looking === 'cheaper' ? 'Finding look-alikes…' : 'Find cheaper option'}
-                </button>
-              </div>
+              <button type="button" className="tm-ai-btn tm-ai-btn-solid" disabled={looking || empty} onClick={findComparisons}>
+                {looking ? <span className="tm-spinner tm-spinner-sm tm-spinner-light" /> : <TrendingDown size={17} />}
+                {looking ? 'Comparing stores…' : 'Find comparisons'}
+              </button>
             );
           })()}
           {aiError && <div className="tm-banner">{aiError}</div>}
           {draft.ai_summary && (
             <div className="tm-ai-result">
+              <h4 className="tm-ai-head">Comparable pieces · live prices</h4>
               <p>{draft.ai_summary}</p>
               {draft.offers.length > 0 && (
                 <ul>

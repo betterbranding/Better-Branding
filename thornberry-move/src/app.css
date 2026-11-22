@@ -942,3 +942,16 @@ textarea {
   font-weight: 700;
   color: var(--red);
 }
+
+.tm-spinner.tm-spinner-sm.tm-spinner-light {
+  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+}
+.tm-ai-head {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--red);
+}

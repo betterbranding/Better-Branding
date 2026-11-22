@@ -100,7 +100,6 @@ export const api = {
     url?: string;
     name?: string;
     room?: string;
-    mode?: 'price' | 'cheaper';
     price?: number;
     store?: string;
   }): Promise<PriceResult> {

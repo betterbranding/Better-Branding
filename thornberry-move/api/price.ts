@@ -1,5 +1,5 @@
-// POST /api/price — identifies a piece of furniture from a photo and/or link and finds live prices with Gemini + Google Search.
-// mode "cheaper" instead finds similar pieces that cost less than the current price.
+// POST /api/price — finds comparable furniture with live prices using Gemini + Google Search.
+// Returns live prices for COMPARABLE pieces from other stores (never the original product itself).
 // Only signed-in household members (move_allowed_users) can call it.
 import { createClient } from '@supabase/supabase-js';
 
@@ -8,7 +8,6 @@ type Body = {
   url?: string;
   name?: string;
   room?: string;
-  mode?: 'price' | 'cheaper';
   price?: number;
   store?: string;
 };
@@ -73,25 +72,37 @@ async function liveLinks<T extends { url: string }>(offers: T[]): Promise<T[]> {
   return offers.filter((_, i) => checks[i]);
 }
 
-function cheaperPrompt(body: Body): string {
+function comparePrompt(body: Body): string {
   const price = num(body.price);
+  const origHost = body.url ? hostOf(body.url) : '';
   return [
     'You help a family furnish their new home in North Richland Hills, Texas (Dallas–Fort Worth) for less money.',
-    body.image?.data ? 'The attached photo shows the furniture piece they like.' : '',
-    body.url ? `Its product page is: ${body.url} — read it for the exact product, size, material, color and price.` : '',
+    body.image?.data ? 'The attached photo shows the ORIGINAL furniture piece they like.' : '',
+    body.url ? `The ORIGINAL piece's product page is: ${body.url} — read it for the exact product, size, material, color and price.` : '',
     body.name ? `They describe it as: "${body.name}".` : '',
     body.room ? `It is for the ${body.room}.` : '',
-    price ? `It currently costs $${price}${body.store ? ` at ${body.store}` : ''}.` : 'First find its current price.',
-    'Use Google Search to find up to 4 SIMILAR pieces (same type, similar size, style, material and color) that cost LESS, sold by real US retailers',
-    '(e.g. Wayfair, Amazon, Target, Walmart, Ashley, Rooms To Go, Costco, IKEA, Home Depot, Lowe\'s, Nebraska Furniture Mart, Overstock). Prefer ones that ship to or are sold near Dallas–Fort Worth.',
+    price ? `The original costs $${price}${body.store ? ` at ${body.store}` : ''}.` : 'Also find the original piece\'s current price.',
+    'TASK: Use Google Search to find up to 5 COMPARABLE pieces — DIFFERENT products from OTHER brands/retailers that look and function like the original',
+    '(same type, similar size, style, material and color) — with their CURRENT live prices from real US retailers',
+    '(e.g. Wayfair, Amazon, Target, Walmart, Ashley, Rooms To Go, Costco, IKEA, Home Depot, Lowe\'s, Nebraska Furniture Mart, Overstock, Macy\'s, Pottery Barn, West Elm). Prefer ones sold near or shipping to Dallas–Fort Worth.',
+    `Do NOT include the original product itself at any store${body.store ? `, and do NOT include anything from ${body.store}` : ''}${origHost ? ` or ${origHost}` : ''}.`,
+    'Focus on options that cost LESS than the original. Only if fewer than 3 cheaper ones exist, add close matches at about the same price.',
     'Only include items with a real, specific product page and a current price you actually found. Never invent links or prices.',
     'Respond with ONLY a JSON object, no other text, in this shape:',
-    '{"item_price": current price of the original piece in USD as a number,',
+    '{"item_name": "short name of the original piece (brand + model if known)", "item_price": current price of the original in USD as a number or null,',
     ' "offers": [{"store": "retailer", "name": "product name", "price": number, "url": "product page", "note": "short: how it differs from the original (size, color, pieces, material)"}] (cheapest first),',
     ' "summary": "one or two sentences comparing the options and which is the closest match for the money"}',
   ]
     .filter(Boolean)
     .join('\n');
+}
+
+function hostOf(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '').toLowerCase();
+  } catch {
+    return '';
+  }
 }
 
 export async function POST(request: Request): Promise<Response> {
@@ -104,25 +115,7 @@ export async function POST(request: Request): Promise<Response> {
   const body = (await request.json().catch(() => ({}))) as Body;
   if (!body.image?.data && !body.url && !body.name) return json({ error: 'Add a photo, link or name first.' }, 400);
 
-  const cheaper = body.mode === 'cheaper';
-  const prompt = cheaper
-    ? cheaperPrompt(body)
-    : [
-    'You help a family furnish their new home in North Richland Hills, Texas (Dallas–Fort Worth).',
-    body.image?.data ? 'Identify the furniture piece in the attached photo (brand and model if you can tell).' : '',
-    body.url ? `The product page is: ${body.url} — read it for the exact product, price and details.` : '',
-    body.name ? `They describe it as: "${body.name}".` : '',
-    body.room ? `It is for the ${body.room}.` : '',
-    'Use Google Search to find CURRENT prices for this exact item at US retailers (or the closest available match if the exact item cannot be found).',
-    'Respond with ONLY a JSON object, no other text, in this shape:',
-    '{"name": "short product name", "brand": "brand or empty", "store": "best place to buy", "price": best current price in USD as a number,',
-    ' "price_low": lowest price found, "price_high": highest price found, "product_url": "link to the best offer",',
-    ' "offers": [{"store": "retailer", "price": number, "url": "product page"}] (up to 4, cheapest first),',
-    ' "summary": "one or two sentences: what it is (size/material/color) and whether the prices are for the exact item or similar ones",',
-    ' "confidence": "exact" or "similar"}',
-  ]
-    .filter(Boolean)
-    .join('\n');
+  const prompt = comparePrompt(body);
 
   const parts: unknown[] = [];
   if (body.image?.data) parts.push({ inline_data: { mime_type: body.image.mimeType || 'image/jpeg', data: body.image.data } });
@@ -158,43 +151,29 @@ export async function POST(request: Request): Promise<Response> {
     .filter((s: { url: string }) => s.url)
     .slice(0, 6);
 
-  if (cheaper) {
-    const itemPrice = num(body.price) ?? num(r.item_price);
-    const found = (Array.isArray(r.offers) ? r.offers : [])
-      .map((o: any) => ({ store: str(o?.store), name: str(o?.name), price: num(o?.price), url: str(o?.url), note: str(o?.note) }))
-      .filter((o) => o.url.startsWith('http') && o.price && (!itemPrice || o.price < itemPrice - 0.5))
-      .sort((a, b) => a.price! - b.price!)
-      .slice(0, 5);
-    const offers = (await liveLinks(found)).slice(0, 4);
-    return json({
-      name: '',
-      brand: '',
-      store: '',
-      price: itemPrice,
-      price_low: null,
-      price_high: null,
-      product_url: '',
-      summary: offers.length ? str(r.summary) : 'No cheaper look-alikes found right now. This may already be a good price.',
-      confidence: 'similar',
-      offers,
-      sources,
-    });
-  }
-
-  const offers = (Array.isArray(r.offers) ? r.offers : [])
-    .map((o: any) => ({ store: str(o?.store), price: num(o?.price), url: str(o?.url) }))
-    .filter((o) => o.url.startsWith('http'))
-    .slice(0, 4);
+  const itemPrice = num(body.price) ?? num(r.item_price);
+  const origHost = body.url ? hostOf(body.url) : '';
+  const origStore = str(body.store).toLowerCase();
+  const found = (Array.isArray(r.offers) ? r.offers : [])
+    .map((o: any) => ({ store: str(o?.store), name: str(o?.name), price: num(o?.price), url: str(o?.url), note: str(o?.note) }))
+    .filter((o) => o.url.startsWith('http') && o.price)
+    // Comparisons only: never the original's own page or store.
+    .filter((o) => !(origHost && hostOf(o.url) === origHost) && !(origStore && o.store.toLowerCase() === origStore))
+    // Keep cheaper options plus close matches up to ~10% above the original.
+    .filter((o) => !itemPrice || o.price! <= itemPrice * 1.1)
+    .sort((a, b) => a.price! - b.price!)
+    .slice(0, 6);
+  const offers = (await liveLinks(found)).slice(0, 5);
   return json({
-    name: str(r.name),
-    brand: str(r.brand),
-    store: str(r.store),
-    price: num(r.price),
-    price_low: num(r.price_low),
-    price_high: num(r.price_high),
-    product_url: str(r.product_url).startsWith('http') ? str(r.product_url) : '',
-    summary: str(r.summary),
-    confidence: str(r.confidence),
+    name: str(r.item_name),
+    brand: '',
+    store: '',
+    price: itemPrice,
+    price_low: null,
+    price_high: null,
+    product_url: '',
+    summary: offers.length ? str(r.summary) : 'No comparable pieces found right now. Try adding a link or a clearer photo.',
+    confidence: 'similar',
     offers,
     sources,
   });
