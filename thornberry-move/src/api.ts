@@ -95,7 +95,15 @@ export const api = {
     return check(await supabase.storage.from(PHOTO_BUCKET).download(path)) as Blob;
   },
 
-  async findPrice(input: { image?: { data: string; mimeType: string }; url?: string; name?: string; room?: string }): Promise<PriceResult> {
+  async findPrice(input: {
+    image?: { data: string; mimeType: string };
+    url?: string;
+    name?: string;
+    room?: string;
+    mode?: 'price' | 'cheaper';
+    price?: number;
+    store?: string;
+  }): Promise<PriceResult> {
     const { data } = await supabase.auth.getSession();
     const res = await fetch('/api/price', {
       method: 'POST',

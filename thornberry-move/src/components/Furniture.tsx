@@ -1,4 +1,4 @@
-import { Camera, ExternalLink, ImagePlus, Link2, Plus, Sparkles } from 'lucide-react';
+import { Camera, ExternalLink, ImagePlus, Link2, Plus, Sparkles, TrendingDown } from 'lucide-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { api, type PriceResult } from '../api';
 import { type Actions, type Furniture as FurnitureRow, FURNITURE_ROOMS, type PriceOffer } from '../types';
@@ -88,7 +88,7 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
   const [draft, setDraft] = useState<Draft | null>(null);
   const [photoUrls, setPhotoUrls] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
-  const [looking, setLooking] = useState(false);
+  const [looking, setLooking] = useState<false | 'price' | 'cheaper'>(false);
   const [aiError, setAiError] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -142,14 +142,42 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
     setDraft({ ...draft, photo: small, photoPreview: URL.createObjectURL(small) });
   };
 
-  const findPrice = async () => {
+  const photoData = async (d: Draft) => {
+    const blob = d.photo ?? (d.image_path ? await api.photoBlob(d.image_path) : null);
+    return blob ? { data: await toBase64(blob), mimeType: blob.type || 'image/jpeg' } : undefined;
+  };
+
+  const findCheaper = async () => {
     if (!draft) return;
-    setLooking(true);
+    setLooking('cheaper');
     setAiError(null);
     try {
-      let image: { data: string; mimeType: string } | undefined;
-      const blob = draft.photo ?? (draft.image_path ? await api.photoBlob(draft.image_path) : null);
-      if (blob) image = { data: await toBase64(blob), mimeType: blob.type || 'image/jpeg' };
+      const r: PriceResult = await api.findPrice({
+        mode: 'cheaper',
+        image: await photoData(draft),
+        url: draft.url.trim() || undefined,
+        name: draft.name.trim() || undefined,
+        room: draft.room,
+        price: Number(draft.price) || undefined,
+        store: draft.store.trim() || undefined,
+      });
+      const patch = { ai_summary: r.summary, offers: r.offers ?? [] };
+      setDraft((d) => d && { ...d, ...patch, price: d.price || (r.price ? String(Math.round(r.price * 100) / 100) : '') });
+      // Saved pieces keep their new options right away, even without tapping Save.
+      if (draft.id) actions.update('furniture', draft.id, patch);
+    } catch (err) {
+      setAiError(err instanceof Error ? err.message : 'Search failed.');
+    } finally {
+      setLooking(false);
+    }
+  };
+
+  const findPrice = async () => {
+    if (!draft) return;
+    setLooking('price');
+    setAiError(null);
+    try {
+      const image = await photoData(draft);
       const r: PriceResult = await api.findPrice({
         image,
         url: draft.url.trim() || undefined,
@@ -354,15 +382,21 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
               />
             </div>
           </Field>
-          <button
-            type="button"
-            className="tm-ai-btn"
-            disabled={looking || (!draft.photo && !draft.image_path && !draft.url.trim() && !draft.name.trim())}
-            onClick={findPrice}
-          >
-            {looking ? <span className="tm-spinner tm-spinner-sm" /> : <Sparkles size={17} />}
-            {looking ? 'Searching stores for prices…' : 'Find live price with AI'}
-          </button>
+          {(() => {
+            const empty = !draft.photo && !draft.image_path && !draft.url.trim() && !draft.name.trim();
+            return (
+              <div className="tm-ai-btns">
+                <button type="button" className="tm-ai-btn" disabled={!!looking || empty} onClick={findPrice}>
+                  {looking === 'price' ? <span className="tm-spinner tm-spinner-sm" /> : <Sparkles size={17} />}
+                  {looking === 'price' ? 'Searching stores…' : 'Find live price'}
+                </button>
+                <button type="button" className="tm-ai-btn tm-ai-btn-solid" disabled={!!looking || empty} onClick={findCheaper}>
+                  {looking === 'cheaper' ? <span className="tm-spinner tm-spinner-sm" /> : <TrendingDown size={17} />}
+                  {looking === 'cheaper' ? 'Finding look-alikes…' : 'Find cheaper option'}
+                </button>
+              </div>
+            );
+          })()}
           {aiError && <div className="tm-banner">{aiError}</div>}
           {draft.ai_summary && (
             <div className="tm-ai-result">
@@ -378,7 +412,10 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
                         {o.name && <small>{o.name}</small>}
                         {o.note && <small className="tm-offer-note">{o.note}</small>}
                       </span>
-                      <strong>{o.price ? money(o.price, o.price % 1 !== 0) : '—'}</strong>
+                      <span className="tm-offer-price">
+                        <strong>{o.price ? money(o.price, o.price % 1 !== 0) : '—'}</strong>
+                        {o.price && Number(draft.price) > o.price + 0.5 && <small>Save {money(Number(draft.price) - o.price)}</small>}
+                      </span>
                     </li>
                   ))}
                 </ul>
