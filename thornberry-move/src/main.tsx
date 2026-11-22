@@ -9,6 +9,7 @@ import { Checklist } from './components/Checklist';
 import { Header } from './components/Header';
 import { Furniture } from './components/Furniture';
 import { Items } from './components/Items';
+import { Rooms } from './components/Rooms';
 import { Login } from './Login';
 import { configured, supabase } from './supabase';
 import type { Actions, AppState, Tab, TableName } from './types';
@@ -122,6 +123,15 @@ const Planner: React.FC<{ onSignOut: () => void }> = ({ onSignOut }) => {
         )}
         {tab === 'items' && <Items items={data.items} actions={actions} />}
         {tab === 'furniture' && <Furniture furniture={data.furniture} actions={actions} />}
+        {tab === 'rooms' && (
+          <Rooms
+            photos={data.photos}
+            fits={data.fits}
+            furniture={data.furniture}
+            actions={actions}
+            onAdded={(table, row) => setData((d) => d && withRows(d, table, (rows) => [row as Row, ...rows]))}
+          />
+        )}
       </main>
       {toast && <div className="tm-toast">{toast}</div>}
     </div>

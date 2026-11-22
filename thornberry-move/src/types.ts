@@ -53,7 +53,27 @@ export interface Furniture {
   created_at?: string;
 }
 
-export type TableName = 'tasks' | 'budget' | 'items' | 'furniture';
+export interface HousePhoto {
+  id: number;
+  label: string;
+  room: string;
+  image_path: string;
+  source: string;
+  sort: number;
+  created_at?: string;
+}
+
+export interface Fit {
+  id: number;
+  photo_id: number;
+  furniture_id: number | null;
+  furniture_name: string;
+  base_fit_id: number | null;
+  image_path: string;
+  created_at?: string;
+}
+
+export type TableName = 'tasks' | 'budget' | 'items' | 'furniture' | 'photos' | 'fits';
 
 export interface AppState {
   settings: Record<string, string>;
@@ -61,6 +81,8 @@ export interface AppState {
   budget: BudgetLine[];
   items: Item[];
   furniture: Furniture[];
+  photos: HousePhoto[];
+  fits: Fit[];
 }
 
 export interface Actions {
@@ -70,7 +92,7 @@ export interface Actions {
   setSetting: (key: string, value: string) => void;
 }
 
-export type Tab = 'checklist' | 'budget' | 'items' | 'furniture';
+export type Tab = 'checklist' | 'budget' | 'items' | 'furniture' | 'rooms';
 
 export const PHASES = ['4+ weeks out', '2–3 weeks out', 'Final week', 'Moving day', 'After the move'];
 export const BUDGET_CATEGORIES = ['Moving', 'Home', 'Utilities', 'Furniture & Decor', 'Other'];

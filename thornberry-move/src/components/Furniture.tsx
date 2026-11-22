@@ -43,7 +43,7 @@ function blank(room: string): Draft {
 }
 
 // Shrinks a photo to at most 1280px on its long side and re-encodes it as JPEG.
-async function shrink(file: Blob): Promise<Blob> {
+export async function shrink(file: Blob): Promise<Blob> {
   const bitmap = await createImageBitmap(file).catch(() => null);
   if (!bitmap) return file;
   const scale = Math.min(1, 1280 / Math.max(bitmap.width, bitmap.height));

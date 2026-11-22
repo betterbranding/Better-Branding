@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { AppState, PriceOffer, TableName } from './types';
+import type { AppState, Fit, PriceOffer, TableName } from './types';
 
 export const PHOTO_BUCKET = 'move-furniture';
 
@@ -24,6 +24,8 @@ const TABLE: Record<TableName, string> = {
   budget: 'move_budget',
   items: 'move_items',
   furniture: 'move_furniture',
+  photos: 'move_house_photos',
+  fits: 'move_fits',
 };
 
 function check<T>(res: { data: T; error: { message: string } | null }): T {
@@ -39,12 +41,14 @@ export const api = {
   },
 
   async state(): Promise<AppState> {
-    const [settings, tasks, budget, items, furniture] = await Promise.all([
+    const [settings, tasks, budget, items, furniture, photos, fits] = await Promise.all([
       supabase.from('move_settings').select('key, value'),
       supabase.from(TABLE.tasks).select('*').order('due', { ascending: true, nullsFirst: false }).order('id'),
       supabase.from(TABLE.budget).select('*').order('id'),
       supabase.from(TABLE.items).select('*').order('id'),
       supabase.from(TABLE.furniture).select('*').order('created_at', { ascending: false }),
+      supabase.from(TABLE.photos).select('*').order('sort').order('id'),
+      supabase.from(TABLE.fits).select('*').order('created_at', { ascending: false }),
     ]);
     const rows = check(settings) as Array<{ key: string; value: string }>;
     return {
@@ -53,6 +57,8 @@ export const api = {
       budget: check(budget) as AppState['budget'],
       items: check(items) as AppState['items'],
       furniture: check(furniture) as AppState['furniture'],
+      photos: check(photos) as AppState['photos'],
+      fits: check(fits) as AppState['fits'],
     };
   },
 
@@ -74,8 +80,8 @@ export const api = {
     check(await supabase.from('move_settings').upsert({ key, value }));
   },
 
-  async uploadPhoto(blob: Blob): Promise<string> {
-    const path = `${crypto.randomUUID()}.jpg`;
+  async uploadPhoto(blob: Blob, folder = ''): Promise<string> {
+    const path = `${folder ? `${folder}/` : ''}${crypto.randomUUID()}.jpg`;
     check(await supabase.storage.from(PHOTO_BUCKET).upload(path, blob, { contentType: 'image/jpeg', upsert: false }));
     return path;
   },
@@ -112,5 +118,18 @@ export const api = {
     const json = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error((json as { error?: string }).error || `Price lookup failed (${res.status})`);
     return json as PriceResult;
+  },
+
+  /** Places a furniture piece into a house photo (or onto an earlier fit) with AI. Returns the saved fit. */
+  async fit(input: { furniture_id: number; photo_id?: number; base_fit_id?: number }): Promise<Fit> {
+    const { data } = await supabase.auth.getSession();
+    const res = await fetch('/api/fit', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${data.session?.access_token ?? ''}` },
+      body: JSON.stringify(input),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error((json as { error?: string }).error || `Virtual fit failed (${res.status})`);
+    return json as Fit;
   },
 };

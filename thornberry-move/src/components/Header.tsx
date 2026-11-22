@@ -24,6 +24,7 @@ export const Header: React.FC<{ data: AppState; tab: Tab; onTab: (t: Tab) => voi
     { id: 'budget', label: 'Budget', count: money(spent) },
     { id: 'items', label: 'Items', count: `${itemsBought}/${data.items.length}` },
     { id: 'furniture', label: 'Furniture', count: `${data.furniture.length}` },
+    { id: 'rooms', label: 'Rooms', count: `${data.photos.length}` },
   ];
 
   return (
