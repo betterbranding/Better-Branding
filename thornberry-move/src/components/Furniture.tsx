@@ -76,6 +76,13 @@ function range(low: number | null, high: number | null): string {
   return '';
 }
 
+/** Lowest-priced offer that beats the item's own price, if any. */
+function cheapest(f: { price: number; offers?: PriceOffer[] }): PriceOffer | null {
+  if (!f.price) return null;
+  const lower = (f.offers ?? []).filter((o) => o.price && o.price < f.price - 0.5);
+  return lower.length ? lower.reduce((a, b) => (b.price! < a.price! ? b : a)) : null;
+}
+
 export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }> = ({ furniture, actions }) => {
   const [filter, setFilter] = useState('all');
   const [draft, setDraft] = useState<Draft | null>(null);
@@ -266,6 +273,14 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
                     {[f.store, range(f.price_low, f.price_high), f.qty > 1 ? `Qty ${f.qty}` : ''].filter(Boolean).join(' · ') ||
                       'No price yet'}
                   </div>
+                  {(() => {
+                    const best = cheapest(f);
+                    return best ? (
+                      <div className="tm-save-line">
+                        Save {money(f.price - best.price!)} · {best.store || host(best.url)} {money(best.price!)}
+                      </div>
+                    ) : null;
+                  })()}
                 </div>
                 <div className="tm-row-end">
                   <strong className="tm-price">{f.price ? money(f.qty * f.price) : '—'}</strong>
@@ -356,9 +371,13 @@ export const Furniture: React.FC<{ furniture: FurnitureRow[]; actions: Actions }
                 <ul>
                   {draft.offers.map((o, i) => (
                     <li key={i}>
-                      <a href={o.url} target="_blank" rel="noreferrer">
-                        {o.store || host(o.url)}
-                      </a>
+                      <span className="tm-offer-main">
+                        <a href={o.url} target="_blank" rel="noreferrer">
+                          {o.store || host(o.url)}
+                        </a>
+                        {o.name && <small>{o.name}</small>}
+                        {o.note && <small className="tm-offer-note">{o.note}</small>}
+                      </span>
                       <strong>{o.price ? money(o.price, o.price % 1 !== 0) : '—'}</strong>
                     </li>
                   ))}

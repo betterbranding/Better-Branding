@@ -31,6 +31,8 @@ export interface PriceOffer {
   store: string;
   price: number | null;
   url: string;
+  name?: string;
+  note?: string;
 }
 
 export interface Furniture {
