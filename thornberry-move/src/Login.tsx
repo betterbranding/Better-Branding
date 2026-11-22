@@ -1,12 +1,5 @@
 import React from 'react';
-
-const Bullseye: React.FC = () => (
-  <svg width="64" height="64" viewBox="0 0 34 34" aria-hidden="true">
-    <circle cx="17" cy="17" r="16" fill="#cc0000" />
-    <circle cx="17" cy="17" r="11" fill="#fff" />
-    <circle cx="17" cy="17" r="6" fill="#cc0000" />
-  </svg>
-);
+import { MovingBox } from './components/ui';
 
 const GoogleG: React.FC = () => (
   <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
@@ -25,7 +18,7 @@ export const Login: React.FC<{
 }> = ({ onGoogle, denied, onSignOut, message }) => (
   <div className="tm-login">
     <div className="tm-login-card">
-      <Bullseye />
+      <MovingBox size={64} face="#cc0000" line="#fff" />
       <h1>Thornberry Move</h1>
       <p className="tm-login-sub">9008 Thornberry Dr · North Richland Hills, TX</p>
       {denied ? (

@@ -90,3 +90,18 @@ export const Fab: React.FC<{ label: string; onClick: () => void; icon: React.Rea
     {label}
   </button>
 );
+
+/** Moving-box logo. `face` fills the box, `line` draws the edges and tape. */
+export const MovingBox: React.FC<{ size?: number; face?: string; line?: string }> = ({
+  size = 34,
+  face = '#fff',
+  line = '#cc0000',
+}) => (
+  <svg width={size} height={size} viewBox="0 0 34 34" aria-hidden="true">
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <path d="M17 3.5 L30.5 10 V24.5 L17 31 L3.5 24.5 V10 Z" fill={face} />
+      <path d="M3.5 10 L17 16.5 L30.5 10 M17 16.5 V31" fill="none" stroke={line} strokeWidth="1.6" />
+      <path d="M10.25 6.75 L23.75 13.25 V20" fill="none" stroke={line} strokeWidth="2.6" />
+    </g>
+  </svg>
+);

@@ -1,14 +1,7 @@
 import React from 'react';
 import type { AppState, Tab } from '../types';
 import { daysUntil, longDate, money } from '../utils';
-
-const Bullseye: React.FC = () => (
-  <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
-    <circle cx="17" cy="17" r="16" fill="#fff" />
-    <circle cx="17" cy="17" r="11" fill="#cc0000" />
-    <circle cx="17" cy="17" r="6" fill="#fff" />
-  </svg>
-);
+import { MovingBox } from './ui';
 
 export const Header: React.FC<{ data: AppState; tab: Tab; onTab: (t: Tab) => void; onSignOut?: () => void }> = ({
   data,
@@ -42,7 +35,7 @@ export const Header: React.FC<{ data: AppState; tab: Tab; onTab: (t: Tab) => voi
           </button>
         )}
         <div className="tm-brand">
-          <Bullseye />
+          <MovingBox size={36} />
           <div>
             <div className="tm-brand-title">9008 Thornberry Dr</div>
             <div className="tm-brand-sub">North Richland Hills, TX</div>
