@@ -14,6 +14,7 @@ export interface BudgetLine {
   estimated: number;
   actual: number;
   paid: number;
+  due: string | null;
 }
 
 export interface Item {

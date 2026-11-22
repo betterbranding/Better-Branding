@@ -868,3 +868,22 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.tm-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: -6px;
+  color: var(--ink-soft);
+}
+.tm-icon-btn-danger:hover {
+  color: var(--red);
+  background: var(--red-tint);
+}
+.tm-row-sub .tm-due {
+  font-size: inherit;
+}
+.tm-banner-soft {
+  background: #f6f6f6;
+  color: var(--ink);
+}

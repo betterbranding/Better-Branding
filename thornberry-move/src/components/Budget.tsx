@@ -1,10 +1,10 @@
-import { ChevronRight, Pencil, Plus } from 'lucide-react';
+import { ChevronRight, Pencil, Plus, Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
 import { type Actions, BUDGET_CATEGORIES, type BudgetLine, type Furniture, type Item } from '../types';
-import { groupBy, money } from '../utils';
+import { daysUntil, groupBy, money, shortDate } from '../utils';
 import { Fab, Field, Sheet } from './ui';
 
-type Draft = { id?: number; name: string; category: string; estimated: string; actual: string; paid: number };
+type Draft = { id?: number; name: string; category: string; estimated: string; actual: string; paid: number; due: string };
 
 export const Budget: React.FC<{
   lines: BudgetLine[];
@@ -29,7 +29,30 @@ export const Budget: React.FC<{
   const base = totalBudget ?? planned;
   const spentPct = base > 0 ? Math.min(100, (spent / base) * 100) : 0;
   const plannedPct = base > 0 ? Math.min(100, (planned / base) * 100) : 0;
-  const sections = groupBy(lines, (l) => l.category, BUDGET_CATEGORIES);
+  // Within each category, soonest due first; undated lines last.
+  const sorted = [...lines].sort((a, b) => (a.due ?? '9999').localeCompare(b.due ?? '9999') || a.id - b.id);
+  const sections = groupBy(sorted, (l) => l.category, BUDGET_CATEGORIES);
+  const isLate = (l: BudgetLine) => !l.paid && !!l.due && daysUntil(l.due) < 0;
+  const lateCount = lines.filter(isLate).length;
+  const dueSoon = lines.filter((l) => !l.paid && l.due && daysUntil(l.due) >= 0 && daysUntil(l.due) <= 7).length;
+
+  const edit = (l: BudgetLine) =>
+    setDraft({
+      id: l.id,
+      name: l.name,
+      category: l.category,
+      estimated: l.estimated ? String(l.estimated) : '',
+      actual: l.actual ? String(l.actual) : '',
+      paid: l.paid,
+      due: l.due ?? '',
+    });
+
+  const confirmDelete = (id: number, name: string) => {
+    if (window.confirm(`Delete "${name}" from the budget?`)) {
+      actions.remove('budget', id);
+      setDraft(null);
+    }
+  };
 
   const saveTotal = () => {
     const n = Number(totalInput.replace(/[^0-9.]/g, ''));
@@ -45,6 +68,7 @@ export const Budget: React.FC<{
       estimated: Number(draft.estimated) || 0,
       actual: Number(draft.actual) || 0,
       paid: draft.paid,
+      due: draft.due || null,
     };
     if (draft.id) actions.update('budget', draft.id, row);
     else actions.create('budget', row);
@@ -116,6 +140,17 @@ export const Budget: React.FC<{
         )}
       </div>
 
+      {lateCount > 0 && (
+        <div className="tm-banner">
+          {lateCount} payment{lateCount === 1 ? ' is' : 's are'} past due
+        </div>
+      )}
+      {lateCount === 0 && dueSoon > 0 && (
+        <div className="tm-banner tm-banner-soft">
+          {dueSoon} payment{dueSoon === 1 ? '' : 's'} due in the next 7 days
+        </div>
+      )}
+
       {sections.map(([category, rows]) => (
         <section key={category} className="tm-section">
           <div className="tm-section-head">
@@ -124,23 +159,15 @@ export const Budget: React.FC<{
           </div>
           <ul className="tm-list">
             {rows.map((l) => (
-              <li
-                key={l.id}
-                className="tm-row"
-                onClick={() =>
-                  setDraft({
-                    id: l.id,
-                    name: l.name,
-                    category: l.category,
-                    estimated: l.estimated ? String(l.estimated) : '',
-                    actual: l.actual ? String(l.actual) : '',
-                    paid: l.paid,
-                  })
-                }
-              >
+              <li key={l.id} className="tm-row" onClick={() => edit(l)}>
                 <div className="tm-row-main">
                   <div className="tm-row-title">{l.name}</div>
                   <div className="tm-row-sub">
+                    {l.due && (
+                      <span className={`tm-due ${isLate(l) ? 'is-late' : ''}`}>
+                        {isLate(l) ? 'Overdue' : 'Due'} {shortDate(l.due)} ·{' '}
+                      </span>
+                    )}
                     Est. {money(l.estimated)}
                     {l.actual > 0 && ` · Actual ${money(l.actual)}`}
                   </div>
@@ -148,6 +175,30 @@ export const Budget: React.FC<{
                 <div className="tm-row-end">
                   <strong>{money(l.actual || l.estimated)}</strong>
                   {l.paid ? <span className="tm-tag tm-tag-dark">Paid</span> : null}
+                </div>
+                <div className="tm-row-actions">
+                  <button
+                    type="button"
+                    className="tm-icon-btn"
+                    aria-label={`Edit ${l.name}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      edit(l);
+                    }}
+                  >
+                    <Pencil size={16} />
+                  </button>
+                  <button
+                    type="button"
+                    className="tm-icon-btn tm-icon-btn-danger"
+                    aria-label={`Delete ${l.name}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      confirmDelete(l.id, l.name);
+                    }}
+                  >
+                    <Trash2 size={16} />
+                  </button>
                 </div>
               </li>
             ))}
@@ -194,7 +245,7 @@ export const Budget: React.FC<{
       <Fab
         label="Add expense"
         icon={<Plus size={18} strokeWidth={2.5} />}
-        onClick={() => setDraft({ name: '', category: BUDGET_CATEGORIES[0], estimated: '', actual: '', paid: 0 })}
+        onClick={() => setDraft({ name: '', category: BUDGET_CATEGORIES[0], estimated: '', actual: '', paid: 0, due: '' })}
       />
       {draft && (
         <Sheet
@@ -202,14 +253,7 @@ export const Budget: React.FC<{
           canSave={draft.name.trim().length > 0}
           onClose={() => setDraft(null)}
           onSave={save}
-          onDelete={
-            draft.id
-              ? () => {
-                  actions.remove('budget', draft.id!);
-                  setDraft(null);
-                }
-              : undefined
-          }
+          onDelete={draft.id ? () => confirmDelete(draft.id!, draft.name) : undefined}
         >
           <Field label="Expense">
             <input autoFocus value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} />
@@ -237,6 +281,9 @@ export const Budget: React.FC<{
               />
             </Field>
           </div>
+          <Field label="Due date">
+            <input type="date" value={draft.due} onChange={(e) => setDraft({ ...draft, due: e.target.value })} />
+          </Field>
           <label className="tm-toggle-row">
             <span>Paid</span>
             <input
